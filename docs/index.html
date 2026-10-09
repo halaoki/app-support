@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Support — Yoshiharu Aoki</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#1a1d24; --ink:#e8eaed; --sub:#9aa0a6;
+    --line:#2a2e37; --accent:#3b82f6; --accent2:#60a5fa;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:32px 20px 80px}
+  header{text-align:center; padding:20px 0 4px}
+  h1{font-size:1.4rem; margin:0 0 6px}
+  .tagline{color:var(--sub); font-size:.92rem; margin:0}
+  h2{font-size:1.12rem; margin:40px 0 6px}
+  .section-sub{color:var(--sub); font-size:.85rem; margin:0 0 14px}
+  .divider{border:0; border-top:1px solid var(--line); margin:14px 0 0}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; margin:14px 0;
+  }
+  .card h3{margin:0 0 6px; font-size:1.05rem}
+  .card p{margin:0 0 12px; color:var(--sub); font-size:.9rem}
+  .card p.ink{color:var(--ink)}
+  .btn{
+    display:inline-block; text-decoration:none; font-weight:600; font-size:.9rem;
+    padding:9px 16px; border-radius:10px; margin:2px 6px 2px 0;
+  }
+  .btn-dl{background:var(--accent); color:#fff}
+  .btn-dl:hover{background:var(--accent2)}
+  .btn-store{background:#262b34; color:var(--ink); border:1px solid var(--line)}
+  .btn-store:hover{border-color:var(--accent2); color:var(--accent2)}
+  .note{font-size:.8rem; color:var(--sub); margin-top:6px}
+  .soon{color:var(--sub); font-size:.85rem; margin:8px 0 0}
+  a{color:var(--accent2)}
+  footer{text-align:center; color:var(--sub); font-size:.78rem; margin-top:48px; border-top:1px solid var(--line); padding-top:20px}
+  .brandnote{font-size:.72rem; color:#6b7280; margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>App Support</h1>
+    <p class="tagline">サポート &amp; ダウンロード / Support &amp; Downloads</p>
+  </header>
+
+  <!-- ===================== APPS ===================== -->
+  <h2>Apps / アプリ</h2>
+  <hr class="divider">
+
+  <div class="card">
+    <h3>IPTCPhotoSender for the Press</h3>
+    <p class="ink">
+      カメラから無線で写真を受信し、IPTCメタデータを付けてFTPで送信する報道向けアプリ。<br>
+      Receive photos wirelessly from your camera, apply IPTC metadata, and send via FTP — built for press photographers.
+    </p>
+    <a class="btn btn-store" href="#" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
+    <p class="note">※ App Store のリンクは公開後に差し替えてください。 / Replace with your App Store link after release.</p>
+  </div>
+
+  <div class="card">
+    <h3>FTPReceiver</h3>
+    <p class="ink">
+      Canon EOS カメラから写真を受信する FTP サーバーアプリ。<br>
+      An FTP server app for receiving photos from Canon EOS cameras.
+    </p>
+    <a class="btn btn-store" href="#" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
+    <p class="note">※ App Store のリンクは公開後に差し替えてください。 / Replace with your App Store link after release.</p>
+  </div>
+
+  <!-- ===================== DOWNLOADS ===================== -->
+  <h2>Camera Connection Settings / カメラ接続設定</h2>
+  <p class="section-sub">
+    両アプリ共通でお使いいただけます。 / For use with both apps.
+  </p>
+  <hr class="divider">
+
+  <div class="card">
+    <h3>Canon</h3>
+    <p class="ink">
+      Canon カメラ用の接続設定ファイルです。EOS Utility などでカメラに読み込んでお使いください。<br>
+      Connection setting file for Canon cameras. Import it into your camera with EOS Utility, etc.
+    </p>
+    <a class="btn btn-dl" href="downloads/canon_connection_setting.NIF" download>Download / ダウンロード</a>
+    <p class="note">
+      対応機種 / Supported: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C<br>
+      ※ ファイル名は実際のファイルに合わせてください。 / Match the file name to your actual file.
+    </p>
+  </div>
+
+  <p class="soon">Nikon・Sony 用は準備中です。 / Nikon &amp; Sony settings are coming soon.</p>
+
+  <!-- ===================== SUPPORT ===================== -->
+  <h2>Support / お問い合わせ</h2>
+  <hr class="divider">
+  <div class="card">
+    <p class="ink">
+      ご質問・ご要望はこちらまで： / Questions or feedback:<br>
+      <a href="mailto:halaoki7@gmail.com">halaoki7@gmail.com</a>
+    </p>
+  </div>
+
+  <footer>
+    © 2026 Yoshiharu Aoki
+    <div class="brandnote">
+      "Canon", "Nikon", and "Sony" are trademarks of their respective owners.
+      These apps and setting files are not affiliated with or endorsed by those companies.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
