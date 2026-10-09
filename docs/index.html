@@ -43,6 +43,23 @@
   footer{text-align:center; color:var(--sub); font-size:.92rem; margin-top:56px; border-top:1px solid var(--line); padding-top:24px}
   .brandnote{font-size:.82rem; color:#6b7280; margin-top:10px; line-height:1.7}
 
+  /* 接続手順リスト */
+  .lang-label{font-size:.85rem; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin:22px 0 6px}
+  .steps{margin:6px 0 4px; padding-left:1.4em}
+  .steps li{margin:0 0 12px; color:var(--ink); font-size:1.04rem}
+  .kbd{
+    background:#262b34; border:1px solid var(--line); border-radius:6px;
+    padding:1px 8px; font-family:ui-monospace,Menlo,monospace; font-size:.92em; color:var(--ink);
+    white-space:nowrap;
+  }
+  /* 注意喚起のコールアウト（セキュリティ注記など） */
+  .callout{
+    margin-top:18px; padding:16px 18px; border-radius:12px;
+    background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.35);
+    font-size:1rem; line-height:1.78; color:var(--ink);
+  }
+  .callout .ttl{font-weight:700; color:#f5a623; display:block; margin-bottom:6px}
+
   /* スマホ幅では文字と余白を少しだけ詰めて読みやすく保つ */
   @media (max-width: 600px){
     body{font-size:17px}
@@ -52,6 +69,7 @@
     .card{padding:20px 20px}
     .card h3{font-size:1.25rem}
     .card p{font-size:1.02rem}
+    .steps li{font-size:1rem}
   }
 </style>
 </head>
@@ -74,7 +92,6 @@
       Receive photos wirelessly from your camera, apply IPTC metadata, and send via FTP — built for press photographers.
     </p>
     <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
-    <p class="note">※ App Store のリンクは公開後に差し替えてください。 / Replace with your App Store link after release.</p>
   </div>
 
   <div class="card">
@@ -84,7 +101,6 @@
       An FTP server app that receives photos from cameras with FTP transfer (Canon, Nikon, Sony, and more).
     </p>
     <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
-    <p class="note">※ App Store のリンクは公開後に差し替えてください。 / Replace with your App Store link after release.</p>
   </div>
 
   <!-- ===================== DOWNLOADS ===================== -->
@@ -97,13 +113,39 @@
   <div class="card">
     <h3>Canon</h3>
     <p class="ink">
-      Canon カメラ用の接続設定ファイルです。EOS Utility などでカメラに読み込んでお使いください。<br>
-      Connection setting file for Canon cameras. Import it into your camera with EOS Utility, etc.
+      Canon カメラ用の接続設定ファイルです。この設定を対応機種にインストールすると、iPhoneのテザリングを使わずに、カメラとFTPで直接つないで画像を受信できます。<br>
+      Connection setting file for Canon cameras. Install it on a supported body to connect by FTP directly — no iPhone tethering needed.
     </p>
     <a class="btn btn-dl" href="downloads/canon01.NIF" download>Download / ダウンロード</a>
+
+    <p class="lang-label">接続手順（日本語）</p>
+    <ol class="steps">
+      <li>ダウンロードした接続設定ファイルをカメラに取り込みます。EOS&nbsp;Utility で読み込むか、ファイルをSDカードの最上位階層（ルート）にコピーして、カメラのメニューから読み込みます。</li>
+      <li>取り込んだ接続設定をカメラに設定し、カメラ側で接続を開始します。</li>
+      <li>iPhone の「設定 → Wi-Fi」を開き、一覧に <span class="kbd">IPTCPS</span> が表示されたらタップして接続します。</li>
+      <li><span class="kbd">IPTCPS</span> の左に接続中アイコン（ぐるぐる）が出たら（このとき Wi-Fi 一覧の最上部に表示されます）、右端の「ⓘ」をタップ →「IPv4アドレスを構成」を<strong>手動</strong>にして、IPアドレス：<span class="kbd">192.168.1.20</span>／サブネットマスク：<span class="kbd">255.255.255.0</span> を入力します。</li>
+      <li>アプリを開いて「Start」で接続を開始します。カメラの LAN ランプが点滅から点灯に変わります。</li>
+      <li>カメラから送信を開始すると、アプリが写真を受信します。</li>
+    </ol>
+
+    <p class="lang-label">How to connect (English)</p>
+    <ol class="steps">
+      <li>Load the downloaded setting file into your camera — via EOS&nbsp;Utility, or copy the file to the top (root) level of the memory card and import it from the camera menu.</li>
+      <li>Select the imported connection setting on the camera and start the connection from the camera.</li>
+      <li>On iPhone, open Settings → Wi-Fi. When <span class="kbd">IPTCPS</span> appears, tap to connect.</li>
+      <li>When the spinner appears next to <span class="kbd">IPTCPS</span> (it moves to the top of the Wi-Fi list), tap the “ⓘ” on the right → set “Configure IP” to <strong>Manual</strong>, then enter IP Address <span class="kbd">192.168.1.20</span> and Subnet Mask <span class="kbd">255.255.255.0</span>.</li>
+      <li>Open the app and tap “Start.” The camera’s LAN lamp changes from blinking to steady.</li>
+      <li>Start sending from the camera, and the app will receive your photos.</li>
+    </ol>
+
+    <div class="callout">
+      <span class="ttl">⚠ セキュリティについて / Security note</span>
+      このダウンロード版の接続設定は、誰でもすぐに使えるよう、iPhone への接続（Wi-Fi）を<strong>パスワード無し</strong>、アプリのサーバー接続を <strong>anonymous（匿名）</strong>に設定しています。このままでも問題なく写真を送受信できますが、ダウンロード後は、できれば Wi-Fi とサーバーの<strong>両方にパスワードを設定</strong>してお使いください。設定は EOS&nbsp;Utility で行うと簡単です。<br><br>
+      To let anyone use it right away, this downloadable setting leaves the iPhone Wi-Fi connection <strong>without a password</strong> and the app’s server login set to <strong>“anonymous.”</strong> It works fine as-is, but after downloading we recommend setting a password for <strong>both the Wi-Fi and the server</strong>. EOS&nbsp;Utility makes this easy.
+    </div>
+
     <p class="note">
-      対応機種 / Supported: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C<br>
-      ※ ファイル名は実際のファイルに合わせてください。 / Match the file name to your actual file.
+      対応機種 / Supported: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C
     </p>
   </div>
 
