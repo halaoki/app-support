@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Guide — IPTCPhotoSender</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#1a1d24; --ink:#e8eaed; --sub:#9aa0a6;
+    --line:#2a2e37; --accent:#3b82f6; --accent2:#60a5fa;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    background:var(--bg); color:var(--ink);
+    font-size:18px; line-height:1.85;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:40px 24px 96px}
+
+  /* ヘッダー */
+  header{text-align:center; padding:12px 0 6px}
+  h1{font-size:2.0rem; margin:0 0 6px; letter-spacing:.01em}
+  .tagline{color:var(--sub); font-size:1.02rem; margin:0}
+  .backlink{display:inline-block; margin:0 0 14px; color:var(--accent2); text-decoration:none; font-size:.95rem}
+  .backlink:hover{text-decoration:underline}
+
+  /* 言語トグル */
+  .lang-toggle{display:flex; gap:8px; justify-content:center; margin:18px 0 6px}
+  .lang-toggle button{
+    font:inherit; font-size:.98rem; font-weight:600; cursor:pointer;
+    padding:8px 20px; border-radius:999px; border:1px solid var(--line);
+    background:#20242d; color:var(--sub);
+  }
+  .lang-toggle button.active{background:var(--accent); color:#fff; border-color:var(--accent)}
+
+  /* 目次 */
+  .toc{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:18px 22px; margin:22px 0 10px;
+  }
+  .toc h2{font-size:1.0rem; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; margin:0 0 10px}
+  .toc ol{margin:0; padding-left:1.3em}
+  .toc li{margin:4px 0}
+  .toc a{color:var(--accent2); text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+
+  /* 見出し・本文 */
+  h2.sec{font-size:1.55rem; margin:46px 0 4px; padding-top:10px}
+  .sec-rule{border:0; border-top:1px solid var(--line); margin:8px 0 14px}
+  h3{font-size:1.18rem; margin:26px 0 6px}
+  p{margin:0 0 14px}
+  ul{margin:0 0 14px; padding-left:1.3em}
+  ul li{margin:6px 0}
+
+  /* コントロール名バッジ */
+  .ctrl{font-weight:700; color:var(--ink)}
+  .kbd{
+    background:#262b34; border:1px solid var(--line); border-radius:6px;
+    padding:1px 8px; font-family:ui-monospace,Menlo,monospace; font-size:.9em; color:var(--ink); white-space:nowrap;
+  }
+  code{background:#262b34; border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-family:ui-monospace,Menlo,monospace; font-size:.9em}
+
+  /* コールアウト（補足） */
+  .note{
+    margin:14px 0; padding:14px 16px; border-radius:12px;
+    background:rgba(59,130,246,.08); border:1px solid rgba(59,130,246,.30);
+    font-size:1rem; line-height:1.78; color:var(--ink);
+  }
+  .note b{color:var(--accent2)}
+
+  /* スクリーンショット枠 */
+  figure{margin:16px 0}
+  .shot{display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:12px}
+  .shot-ph{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    min-height:160px; border:1px dashed var(--line); border-radius:12px;
+    color:var(--sub); background:#13161c; font-size:.95rem; padding:20px;
+  }
+  figcaption{color:var(--sub); font-size:.88rem; text-align:center; margin-top:8px}
+
+  a{color:var(--accent2)}
+  footer{text-align:center; color:var(--sub); font-size:.92rem; margin-top:56px; border-top:1px solid var(--line); padding-top:24px}
+
+  [hidden]{display:none !important}
+
+  @media (max-width:600px){
+    body{font-size:17px}
+    .wrap{padding:28px 16px 80px}
+    h1{font-size:1.7rem}
+    h2.sec{font-size:1.35rem; margin:40px 0 4px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="./">← Support / サポートへ戻る</a>
+
+  <header>
+    <h1>User Guide / ユーザーガイド</h1>
+    <p class="tagline">IPTCPhotoSender for the Press</p>
+  </header>
+
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- 日本語                                                         -->
+  <!-- ============================================================= -->
+  <section id="guide-ja">
+
+    <nav class="toc">
+      <h2>目次</h2>
+      <ol>
+        <li><a href="#ja-photos">Photos タブ</a></li>
+        <li><a href="#ja-sent">Sent タブ</a></li>
+        <li><a href="#ja-template">Template タブ</a></li>
+        <li><a href="#ja-receive">Receive タブ</a></li>
+        <li><a href="#ja-more">More タブ</a></li>
+      </ol>
+    </nav>
+
+    <p>カメラから無線で写真を受信し、IPTC メタデータ（写真説明）を付けて FTP で送稿するまでを、iPhone / iPad 1 台で完結できる報道・スポーツフォトグラファー向けアプリです。本ガイドは各タブの操作を順に説明します。</p>
+
+    <!-- Photos -->
+    <h2 class="sec" id="ja-photos">Photos タブ</h2>
+    <hr class="sec-rule">
+    <p>送稿する写真を登録し、メタデータを付けて送信する中心のタブです。</p>
+
+    <figure>
+      <div class="shot-ph">スクリーンショット：Photos タブ</div>
+      <figcaption>（ここに画像を入れてください）</figcaption>
+    </figure>
+
+    <p><span class="ctrl">Add Photos ／ ＋ ボタン</span><br>
+    送信する写真をタブに登録するためのボタンです。登録写真が 0 枚のときは画面中央に「Add Photos」が表示されます。1 枚でも登録されると「Add Photos」は消え、以降は右上隅の「＋」ボタンから登録します。</p>
+
+    <p><span class="ctrl">Edit（左上隅）</span><br>
+    タブ上の写真を選択して、選んだ写真の削除、テンプレートの適用、選択した写真だけの送信（選択送信）ができます。1 枚ずつの送信は、写真をタップして開く編集画面からも行えます。</p>
+
+    <p><span class="ctrl">…（右上隅）</span><br>
+    タブ上にあるすべての写真へ同じテンプレートを一括で適用します。また、すべての写真を削除することもできます。</p>
+
+    <p><span class="ctrl">Receive（中央上）</span><br>
+    カメラから送信される写真を受信します（内蔵サーバーの動作をオンにします）。</p>
+    <ul>
+      <li>iPhone のテザリング（Personal Hotspot）機能を使って受信できます。</li>
+      <li>または、カメラ側で FTP 接続設定ファイルを作成しておけば、テザリングを使わずにカメラと直接接続して受信できます。Canon カメラ（対応機種）用の接続設定はサポートページから無料でダウンロードできます。</li>
+      <li>Nikon・Sony 用も後日用意します。</li>
+    </ul>
+
+    <p><span class="ctrl">テンプレート選択ボタン（中央 Receive の下）</span><br>
+    Receive で写真を受信する際、ここで選んだテンプレートが適用された状態で取り込まれます。（受信後も、Edit から何度でも別のテンプレートを適用し直せます。）</p>
+
+    <p><span class="ctrl">Embed IPTC &amp; Send via FTP ボタン（下段タブの上）</span><br>
+    写真に適用されているテンプレート（写真説明メタデータ）を最終確定し、FTP で送信を開始します。このボタンの上には、現在選択されている FTP 送信先が表示されています。</p>
+
+    <div class="note">
+      <b>送信中の画面ロックについて</b><br>
+      ・送信中に iPhone 本体をロック（スリープ）すると、送信は止まってしまいます。そのため、送信中は自動ロック（自動スリープ）が働かないようにしています。<br>
+      ・送信中の誤タッチを防ぐために、中央上部に「鍵アイコン」が表示されます。これをタップすると画面をソフトロックできます。<b>ソフトロックでは送信は止まりません。</b> ポケットに入れても誤操作しません。<br>
+      ・ソフトロックの解除は、画面下部に現れるスワイプバーで行います。<br>
+      ・ソフトロック中は、画面中央で現在の送信状況（送信済み枚数・残り枚数など）を確認できます。
+    </div>
+
+    <h3>写真の編集画面</h3>
+    <p>登録された写真のアイコンをタップすると、その写真の編集画面が開きます。</p>
+
+    <figure>
+      <div class="shot-ph">スクリーンショット：写真の編集画面</div>
+      <figcaption>（ここに画像を入れてください）</figcaption>
+    </figure>
+
+    <ul>
+      <li><span class="ctrl">虫眼鏡アイコン（写真の左下隅）</span>：タップすると全画面表示になり、ズームして写真のピント・細部を確認できます。</li>
+      <li><span class="ctrl">切り取りアイコン（写真の右下隅）</span>：タップするとトリミング画面が開き、トリミングや傾き調整ができます。確定後も何度でも調整し直せ、さらに一度も触っていない最初の状態に戻すこともできます。</li>
+      <li><span class="ctrl">メタデータ</span>：その下に表示されます。別のテンプレートの適用や、内容の編集ができます。</li>
+      <li><span class="ctrl">最下段のボタン</span>：この写真を 1 枚だけ送信／FTP ではなく共有（Share）する／メタデータをクリアする／この写真を削除する、に加えて、<b>メタデータのコピー・ペースト</b>ができます。直前に編集した写真と同じメタデータを別の写真にも適用したいときに便利です。コピー＆ペーストしても、<b>撮影日時と連番（<code>{Seq}</code>／<code>{Jseq}</code>）は各写真固有の値が保たれます</b>（上書きされません）。連番は送信時に写真ごとに振られます。</li>
+    </ul>
+
+    <!-- Sent -->
+    <h2 class="sec" id="ja-sent">Sent タブ</h2>
+    <hr class="sec-rule">
+    <p>Photos タブで送信が完了した写真が、ここに移動します。再送できるほか、再送の際に写真説明をはじめとするメタデータを改めて編集することもできます。基本的に Photos タブの編集画面と同じことができます。</p>
+    <p>※ あくまでも「再送」なので、トリミングはできないようにしています。トリミングできてしまうと、再送ではなく新規写真の送信になってしまうためです。</p>
+
+    <figure>
+      <div class="shot-ph">スクリーンショット：Sent タブ</div>
+      <figcaption>（ここに画像を入れてください）</figcaption>
+    </figure>
+
+    <!-- Template -->
+    <h2 class="sec" id="ja-template">Template タブ</h2>
+    <hr class="sec-rule">
+
+    <h3>Template Field（テンプレート項目）</h3>
+    <p>まず下方へスクロールし、Template Field（全 20 項目）のうち、自分に必要な項目へ内容を入力します。</p>
+    <p>右側の <span class="ctrl">Customize</span> ボタンから、項目の編集画面を開けます。20 項目のうち、左のチェックで「普段表示する項目」を選べます。登録後にまず触ることのない固定の項目はチェックを外しておくと、普段は見えなくなってテンプレートがスッキリし、誤編集も防げます。項目の並び順もここで変更できます。</p>
+    <p>編集したテンプレートは、上へスクロールして Template 欄の <span class="ctrl">Save</span> ボタンから名前を付けて保存できます。テンプレートは <b>75 個</b>まで登録できます。また、保存しているすべてのテンプレートを 1 つのファイルとして書き出し、バックアップしたり共有したりできます。</p>
+
+    <figure>
+      <div class="shot-ph">スクリーンショット：Template タブ</div>
+      <figcaption>（ここに画像を入れてください）</figcaption>
+    </figure>
+
+    <h3>Sequence Variable（連番変数）</h3>
+    <p>続き番号を振る変数を設定できます。使用・不使用はスイッチで切り替えられ、テンプレートのどの項目の中でも使用できます。</p>
+    <ul>
+      <li><b>半角数字</b>で入れる場合は <code>{Seq}</code>、<b>全角数字</b>で入れる場合は <code>{Jseq}</code> を使います。</li>
+      <li>続き番号の開始番号は自由に設定できます。下の <span class="ctrl">Reset</span> ボタンを押すと、開始番号にリセットされます。</li>
+      <li>この番号は<b>写真の送信をかけた時に振られる</b>ため、実際に送信した写真にのみ適用されます。したがって飛び番号や欠番は出ず、送信枚数と完全に対応した番号になります。</li>
+      <li>Sent タブにある送信済みの写真を再送しても、この番号だけは変わりません。その写真固有の番号となります。</li>
+    </ul>
+
+    <h3>Code Replacements（コード置換）</h3>
+    <p>Photo Mechanic などで使えるコード置換サービスを利用できます。コードはダウンロードして使えるのはもちろん、そのコードに自分で作ったコードを足して使うことが、アプリだけで完結してできます。自作のコードは共有・保存・並べ替えができます。</p>
+    <p>テンプレートに使うと、実際の写真へ適用するまではコード表示のままなので、変数のような使い方もでき、活用法はユーザーのアイデア次第で広がります。Photos タブや Sent タブで個別の写真に使う場合は、コードを入れた瞬間に変換されます。</p>
+    <p>コード変換の「挟み文字」は初期設定では <code>=</code> ですが、自分の使いやすい文字に変更できます。</p>
+
+    <!-- Receive -->
+    <h2 class="sec" id="ja-receive">Receive タブ</h2>
+    <hr class="sec-rule">
+    <p>カメラから写真を受信するためのサーバー情報を設定するタブです。</p>
+    <ul>
+      <li><span class="ctrl">Address</span>：カメラ側で設定したものになります。テザリングでの接続では iPhone が自動で割り振ります。</li>
+      <li><span class="ctrl">Port</span>：2121 が初期設定で固定されています。</li>
+      <li><span class="ctrl">Username・Password</span>：ご自分の好きなものを設定してください（接続するカメラ側もこれに合わせます）。設定せず空欄のままでも運用できますが、セキュリティのため設定することをおすすめします。</li>
+      <li><span class="ctrl">Send RAW</span>：カメラから受信したままの、まったく加工しない RAW の状態で送信するモードです。テストなどに便利に使えます。</li>
+    </ul>
+
+    <!-- More -->
+    <h2 class="sec" id="ja-more">More タブ</h2>
+    <hr class="sec-rule">
+    <p>3 つのページがあります。</p>
+    <ol>
+      <li><span class="ctrl">FTP</span>：写真の送信先（FTP）を設定します。設定は複数作成でき、写真によって送信先を切り替えられます。</li>
+      <li><span class="ctrl">Log</span>：アプリの挙動を記録しています。不具合が出たときに、原因究明の手がかりになります。</li>
+      <li><span class="ctrl">Account</span>：現在のサブスクリプションの状態など、ご自分の利用状況を確認できます。</li>
+    </ol>
+
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- English                                                        -->
+  <!-- ============================================================= -->
+  <section id="guide-en" hidden>
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#en-photos">Photos Tab</a></li>
+        <li><a href="#en-sent">Sent Tab</a></li>
+        <li><a href="#en-template">Template Tab</a></li>
+        <li><a href="#en-receive">Receive Tab</a></li>
+        <li><a href="#en-more">More Tab</a></li>
+      </ol>
+    </nav>
+
+    <p>An all-in-one wireless workflow for press and sports photographers: receive photos from your camera, add IPTC metadata (captions), and send them to your picture desk over FTP — all on a single iPhone or iPad. This guide walks through each tab in turn.</p>
+
+    <!-- Photos -->
+    <h2 class="sec" id="en-photos">Photos Tab</h2>
+    <hr class="sec-rule">
+    <p>The main tab, where you register the photos to file, add their metadata, and send them.</p>
+
+    <figure>
+      <div class="shot-ph">Screenshot: Photos tab</div>
+      <figcaption>(Place your image here)</figcaption>
+    </figure>
+
+    <p><span class="ctrl">Add Photos / the "+" button</span><br>
+    Buttons for registering the photos you want to send. When no photos are registered, "Add Photos" appears in the center of the screen. Once at least one photo is registered, "Add Photos" disappears and you add more using the "+" button in the top-right corner.</p>
+
+    <p><span class="ctrl">Edit (top-left)</span><br>
+    Select photos in the tab to delete them, apply a template to them, or send only the selected photos (Send Selected). You can also send a single photo from the editing screen that opens when you tap a photo.</p>
+
+    <p><span class="ctrl">… (top-right)</span><br>
+    Applies one template to all photos currently in the tab at once. You can also delete all photos here.</p>
+
+    <p><span class="ctrl">Receive (top-center)</span><br>
+    Receives photos sent from your camera (turns the built-in server on).</p>
+    <ul>
+      <li>You can receive over your iPhone's tethering (Personal Hotspot) feature.</li>
+      <li>Alternatively, if you create an FTP connection setting file on the camera, you can connect to the camera directly and receive without using tethering. Connection settings for Canon cameras (supported models) can be downloaded for free from the Support page.</li>
+      <li>Settings for Nikon and Sony will be added later.</li>
+    </ul>
+
+    <p><span class="ctrl">Template selector (below Receive, center)</span><br>
+    When you receive photos with Receive, they are imported with the template selected here already applied. (After receiving, you can re-apply a different template as many times as you like from Edit.)</p>
+
+    <p><span class="ctrl">Embed IPTC &amp; Send via FTP button (above the bottom tab bar)</span><br>
+    Finalizes the template (caption metadata) applied to your photos and starts sending over FTP. The FTP destination currently selected is shown just above this button.</p>
+
+    <div class="note">
+      <b>About locking the screen while sending</b><br>
+      ・If you lock (put to sleep) the iPhone itself while sending, the transfer stops. For this reason, auto-lock (auto-sleep) is disabled while sending.<br>
+      ・To prevent accidental taps during a transfer, a lock icon appears at the top-center. Tap it to soft-lock the screen. <b>A soft lock does NOT stop the transfer.</b> You can put the phone in your pocket without triggering anything by mistake.<br>
+      ・To release the soft lock, use the swipe bar that appears at the bottom of the screen.<br>
+      ・While soft-locked, the current transfer status (photos sent, photos remaining, and so on) is shown in the center of the screen.
+    </div>
+
+    <h3>Photo editing screen</h3>
+    <p>Tap a registered photo's thumbnail to open its editing screen.</p>
+
+    <figure>
+      <div class="shot-ph">Screenshot: Photo editing screen</div>
+      <figcaption>(Place your image here)</figcaption>
+    </figure>
+
+    <ul>
+      <li><span class="ctrl">Magnifier icon (bottom-left of the photo)</span>: Tap to view the photo full-screen, where you can zoom in to check focus and fine detail.</li>
+      <li><span class="ctrl">Crop icon (bottom-right of the photo)</span>: Tap to open the cropping screen for cropping and straightening. You can re-adjust as many times as you like even after confirming, and you can also revert to the untouched original.</li>
+      <li><span class="ctrl">Metadata</span>: Shown below. You can apply a different template and edit the content.</li>
+      <li><span class="ctrl">Buttons at the bottom</span>: Send this one photo / Share instead of FTP / Clear the metadata / Delete this photo, plus <b>Copy and Paste metadata.</b> Copy/Paste is handy when you want to apply the same metadata you just entered to another photo. Even when you copy and paste, <b>the capture date/time and the sequence number (<code>{Seq}</code> / <code>{Jseq}</code>) keep each photo's own values</b> (they are not overwritten). Sequence numbers are assigned per photo at the moment of sending.</li>
+    </ul>
+
+    <!-- Sent -->
+    <h2 class="sec" id="en-sent">Sent Tab</h2>
+    <hr class="sec-rule">
+    <p>Photos that finished sending from the Photos tab move here. You can resend them, and you can re-edit the caption and other metadata before resending. In general you can do the same things as on the Photos editing screen.</p>
+    <p>Note: Because this is strictly a resend, cropping is disabled. If cropping were allowed, it would no longer be a resend but the sending of a new, different photo.</p>
+
+    <figure>
+      <div class="shot-ph">Screenshot: Sent tab</div>
+      <figcaption>(Place your image here)</figcaption>
+    </figure>
+
+    <!-- Template -->
+    <h2 class="sec" id="en-template">Template Tab</h2>
+    <hr class="sec-rule">
+
+    <h3>Template Fields</h3>
+    <p>First, scroll down and enter content into the Template Fields (20 in total) that you need.</p>
+    <p>On the right, the <span class="ctrl">Customize</span> button opens the field editor. Using the checkboxes on the left, you choose which of the 20 fields are normally visible. Unchecking fixed fields you rarely touch after setup keeps them hidden — this makes the template tidier and helps prevent accidental edits. You can also change the field order here.</p>
+    <p>To save an edited template, scroll back up and use the <span class="ctrl">Save</span> button in the Template section to save it with a name. You can store up to <b>75 templates.</b> You can also export all of your saved templates as a single file to back them up or share them.</p>
+
+    <figure>
+      <div class="shot-ph">Screenshot: Template tab</div>
+      <figcaption>(Place your image here)</figcaption>
+    </figure>
+
+    <h3>Sequence Variable</h3>
+    <p>Lets you set up an incrementing number. Turn it on or off with the switch; it can be used inside any template field.</p>
+    <ul>
+      <li>Use <code>{Seq}</code> for half-width digits, or <code>{Jseq}</code> for full-width digits.</li>
+      <li>You can freely set the starting number. The <span class="ctrl">Reset</span> button below returns it to the start number.</li>
+      <li>This number is assigned <b>at the moment you send the photos,</b> so it is applied only to the photos you actually send. As a result there are no gaps or skipped numbers, and the numbering corresponds exactly to the number of photos sent.</li>
+      <li>If you resend a photo from the Sent tab, this number alone does not change — it stays the number unique to that photo.</li>
+    </ul>
+
+    <h3>Code Replacements</h3>
+    <p>You can use the same code-replacement service available in tools like Photo Mechanic. You can of course download and use code files, and you can also add your own codes on top of them — entirely within the app. Your own codes can be shared, saved, and reordered.</p>
+    <p>When used in a template, a code stays shown as the code until it is applied to an actual photo, so it can also be used like a variable — the possibilities are up to your own ideas. When used on an individual photo in the Photos or Sent tab, a code is converted the moment you type it.</p>
+    <p>The delimiter that wraps a code defaults to <code>=</code>, but you can change it to whatever character is easiest for you.</p>
+
+    <!-- Receive -->
+    <h2 class="sec" id="en-receive">Receive Tab</h2>
+    <hr class="sec-rule">
+    <p>The tab for setting up the server information used to receive photos from your camera.</p>
+    <ul>
+      <li><span class="ctrl">Address</span>: This is what you set on the camera. For a tethering connection, the iPhone assigns it automatically.</li>
+      <li><span class="ctrl">Port</span>: 2121 is fixed as the default.</li>
+      <li><span class="ctrl">Username / Password</span>: Set these to whatever you like (and match them on the connecting camera). You can operate with them left blank, but we recommend setting them for security.</li>
+      <li><span class="ctrl">Send RAW</span>: A mode that sends the photo exactly as received from the camera — the untouched RAW. Useful for testing and similar purposes.</li>
+    </ul>
+
+    <!-- More -->
+    <h2 class="sec" id="en-more">More Tab</h2>
+    <hr class="sec-rule">
+    <p>There are three pages:</p>
+    <ol>
+      <li><span class="ctrl">FTP</span>: Set up your send destinations (FTP). You can create multiple configurations and switch the destination depending on the photo.</li>
+      <li><span class="ctrl">Log</span>: Records the app's activity. It gives you clues for tracking down the cause if something goes wrong.</li>
+      <li><span class="ctrl">Account</span>: Check your own status, such as the current subscription state.</li>
+    </ol>
+
+  </section>
+
+  <footer>
+    © 2026 Yoshiharu Aoki ·
+    <a href="./">Support / サポート</a>
+  </footer>
+
+</div>
+
+<script>
+  // 言語切り替え（ストレージは使わず、表示の出し分けのみ）
+  function setLang(lang){
+    var ja = document.getElementById('guide-ja');
+    var en = document.getElementById('guide-en');
+    var bja = document.getElementById('btn-ja');
+    var ben = document.getElementById('btn-en');
+    var isJa = (lang === 'ja');
+    ja.hidden = !isJa;
+    en.hidden = isJa;
+    bja.classList.toggle('active', isJa);
+    ben.classList.toggle('active', !isJa);
+    document.documentElement.lang = lang;
+    // 言語を切り替えたらページ先頭へ
+    window.scrollTo({ top: 0 });
+  }
+</script>
+
+</body>
+</html>
