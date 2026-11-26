@@ -162,7 +162,11 @@
     <p class="lang-label">接続手順（日本語）</p>
     <ol class="steps">
       <li>ダウンロードした接続設定ファイル（ファイル名：canon01.NIF）をカメラに取り込みます。EOS&nbsp;Utility で読み込むか、ファイルをメモリーカードの最上位階層（ルート）にコピーして、カメラのメニューから読み込みます。</li>
-      <li>iPhone で現在接続している Wi-Fi の「自動接続（Auto-Join）」を<strong>オフ</strong>にしておきます。これをしないと、カメラと接続してもすぐに切断され、自動接続の Wi-Fi に戻ってしまいます（カメラとの接続を優先させるため）。</li>
+      <li>iPhone で現在接続している Wi-Fi の「自動接続（Auto-Join）」を<strong>オフ</strong>にしておきます。これをしないと、カメラと接続してもすぐに切断され、自動接続の Wi-Fi に戻ってしまいます（カメラとの接続を優先させるため）。<!-- ▼ 日本語 step 2 の末尾に追加（かんたん接続の注記） -->
+<div style="margin:0.6em 0 0; padding:0.7em 0.9em; border-left:3px solid #0a84ff; background:rgba(10,132,255,0.06); border-radius:5px; font-size:0.95em; line-height:1.7;">
+  <strong>※ IPTCPhotoSender ver3.3 / FTPReceiver v1.8 の「かんたん接続」オンで使用する場合</strong>は、現在接続している Wi-Fi の自動接続をオフにする必要はありません。カメラからの受信を終えてアプリの「受信」をオフ（FTPReceiver ではサーバー「停止」）にし、カメラの FTP 接続もオフにすれば、接続が切断され、カメラと接続する前に接続していた Wi-Fi に接続し直します。
+</div>
+<!-- ▲ ここまで（日本語） --></li>
       <li>取り込んだ接続設定をカメラに設定し、カメラ側で接続を開始します。</li>
       <li>iPhone の「設定 → Wi-Fi」を開き、一覧に <span class="kbd">IPTCPS</span> が表示されたらタップして接続します。</li>
       <li><span class="kbd">IPTCPS</span> の左に接続中アイコン（ぐるぐる）が出たら（このとき Wi-Fi 一覧の最上部に表示されます）、右端の「ⓘ」をタップ →「IPv4アドレスを構成」を<strong>手動</strong>にして、IPアドレス：<span class="kbd">192.168.1.20</span>／サブネットマスク：<span class="kbd">255.255.255.0</span> を入力します。あわせて、この画面で <span class="kbd">IPTCPS</span> の「自動接続（Auto-Join）」を<strong>オン</strong>にします。</li>
