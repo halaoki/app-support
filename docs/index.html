@@ -1,23 +1,3 @@
-<div style="max-width:920px; margin:20px auto 0; padding:18px 20px; border:1px solid rgba(59,130,246,.35); border-radius:14px; background:linear-gradient(180deg, rgba(59,130,246,.12), rgba(59,130,246,.04)); color:#e8eaed; font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;">
-  <div style="font-size:1.15rem; font-weight:700; margin-bottom:6px;">
-    🖥 Mac版を検討しています / Thinking about a Mac version
-  </div>
-  <p style="margin:0 0 14px; color:#c7cbd1; font-size:.98rem; line-height:1.75;">
-    デスクでじっくり取材・送信する方へ、IPTCPhotoSender の Mac 版を検討しています。興味がある方はお知らせを受け取れます。「こんな機能が欲しい」というご要望もぜひお聞かせください。<br>
-    We're considering a Mac version of IPTCPhotoSender for desk-based work. Sign up to be notified when it's ready, and tell us what you'd want in it.
-  </p>
-  <div style="display:flex; flex-wrap:wrap; gap:10px;">
-    <a href="mailto:support.iptcphotosender@gmail.com?subject=Mac%20version%20-%20notify%20me&body=Please%20add%20me%20to%20the%20Mac%20version%20notification%20list."
-       style="display:inline-block; padding:10px 18px; border-radius:999px; background:#3b82f6; color:#ffffff; text-decoration:none; font-weight:600; font-size:.95rem;">
-      🔔 案内を受け取る / Notify me
-    </a>
-    <a href="mailto:support.iptcphotosender@gmail.com?subject=Mac%20version%20-%20feedback&body=What%20I%27d%20like%20in%20a%20Mac%20version%3A%0A"
-       style="display:inline-block; padding:10px 18px; border-radius:999px; background:transparent; color:#60a5fa; text-decoration:none; font-weight:600; font-size:.95rem; border:1px solid rgba(96,165,250,.5);">
-      ✍️ ご意見を送る / Send feedback
-    </a>
-  </div>
-</div>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -38,7 +18,7 @@
   .wrap{max-width:920px; margin:0 auto; padding:44px 24px 96px}
   header{text-align:center; padding:24px 0 6px}
   h1{font-size:2.2rem; margin:0 0 10px; letter-spacing:.01em}
-  .tagline{color:var(--sub); font-size:1.05rem; margin:0}
+  .tagline{color:var(--sub); font-size:1.05rem; margin:0 0 4px}
   h2{font-size:1.65rem; margin:52px 0 10px}
   .section-sub{color:var(--sub); font-size:1rem; margin:0 0 16px}
   .divider{border:0; border-top:1px solid var(--line); margin:16px 0 0}
@@ -63,6 +43,33 @@
   footer{text-align:center; color:var(--sub); font-size:.92rem; margin-top:56px; border-top:1px solid var(--line); padding-top:24px}
   .brandnote{font-size:.82rem; color:#6b7280; margin-top:10px; line-height:1.7}
 
+  /* 言語切替バー */
+  .langbar{margin-top:14px; font-size:1rem; color:var(--sub)}
+  .langbar select{
+    font:inherit; font-size:1rem; color:var(--ink); background:var(--card);
+    border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-left:6px;
+  }
+  .lang-content{display:none}
+  .lang-content.active{display:block}
+
+  /* Mac版バナー */
+  .macbanner{
+    margin:20px 0 0; padding:18px 20px; border:1px solid rgba(59,130,246,.35);
+    border-radius:14px; background:linear-gradient(180deg, rgba(59,130,246,.12), rgba(59,130,246,.04));
+  }
+  .macbanner .ttl{font-size:1.15rem; font-weight:700; margin-bottom:6px}
+  .macbanner p{margin:0 0 14px; color:var(--sub); font-size:.98rem; line-height:1.75}
+  .pillrow{display:flex; flex-wrap:wrap; gap:10px}
+  .pill{display:inline-block; padding:10px 18px; border-radius:999px; text-decoration:none; font-weight:600; font-size:.95rem}
+  .pill-f{background:var(--accent); color:#fff}
+  .pill-o{background:transparent; color:var(--accent2); border:1px solid rgba(96,165,250,.5)}
+
+  /* 更新のお知らせ */
+  .update{margin:1.5em 0; padding:1em 1.2em; border-left:4px solid var(--accent); background:rgba(59,130,246,.06); border-radius:6px; line-height:1.75}
+  .update p{margin:0 0 .7em}
+  .update p:last-child{margin:0}
+  .update .lead{font-weight:700}
+
   /* 接続手順リスト */
   .lang-label{font-size:.85rem; color:var(--sub); text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin:22px 0 6px}
   .steps{margin:6px 0 4px; padding-left:1.4em}
@@ -72,6 +79,8 @@
     padding:1px 8px; font-family:ui-monospace,Menlo,monospace; font-size:.92em; color:var(--ink);
     white-space:nowrap;
   }
+  /* 手順内の補足ノート（かんたん接続など） */
+  .qnote{margin:.6em 0 0; padding:.7em .9em; border-left:3px solid var(--accent); background:rgba(59,130,246,.06); border-radius:5px; font-size:.95em; line-height:1.7}
   /* 注意喚起のコールアウト（セキュリティ注記など） */
   .callout{
     margin-top:18px; padding:16px 18px; border-radius:12px;
@@ -98,118 +107,330 @@
 
   <header>
     <h1>App Support</h1>
-    <p class="tagline">サポート &amp; ダウンロード / Support &amp; Downloads</p>
+    <div class="langbar">🌐
+      <select id="langSelect" aria-label="Language">
+        <option value="ja">日本語</option>
+        <option value="en">English</option>
+        <option value="it">Italiano</option>
+        <option value="es">Español</option>
+        <option value="ko">한국어</option>
+      </select>
+    </div>
   </header>
-<!-- ▼ ver3.3 / ver1.8 更新のお知らせ（App Support の見出しと Apps セクションの間に貼り付け） -->
-<section style="margin:1.5em 0; padding:1em 1.2em; border-left:4px solid #0a84ff; background:rgba(10,132,255,0.06); border-radius:6px; line-height:1.75;">
-  <p style="margin:0 0 0.7em; font-weight:700;">
-    ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver) よりカメラからの写真受信の操作が容易になりました。
-  </p>
-  <p style="margin:0 0 0.7em;">
-    基本、二つのアプリケーションでは iPhone / iPad の Personal HotSpot（インターネット共有）を利用してカメラと接続し、写真の受信を行います。これは設定・接続が簡単で、誰もが容易に接続できるためです。しかし実は、カメラ上で iPhone / iPad への接続設定を設定すれば、Personal HotSpot 機能を使用しなくても、カメラと iPhone / iPad を直接接続することが可能です。今までも直接接続は可能でしたが、今回の ver3.3 / ver1.8 により、直接接続は確実でとても簡単にできるようになりました。
-  </p>
-  <p style="margin:0 0 1em;">
-    下記にある「カメラ接続設定」を利用するか、ご自分で接続設定を作成し、カメラに設定してアプリの受信タブ（かんたん接続）にて受信設定し利用すると、スピード感が重要な取材中に、ストレス無く撮影した写真をカメラから iPhone / iPad に受け渡し・送信することができます。
-  </p>
-  <p style="margin:0 0 0.7em; font-weight:700;">
-    Receiving photos from your camera is now easier, starting with ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver).
-  </p>
-  <p style="margin:0 0 0.7em;">
-    By default, both apps connect to your camera using the iPhone / iPad Personal Hotspot (Internet Sharing) to receive photos, because it is simple to set up and anyone can connect easily. In fact, however, if you configure the connection to your iPhone / iPad on the camera itself, you can connect the camera and your iPhone / iPad directly — without using Personal Hotspot. Direct connection was always possible, but ver3.3 / ver1.8 now make it reliable and very easy.
-  </p>
-  <p style="margin:0;">
-    Use the “Camera Connection Settings” below, or create your own connection profile and set it on the camera, then set it up on the app’s Receive tab (Quick Connect). You can then hand off and send the photos you shoot from the camera to your iPhone / iPad smoothly — without stress — during fast-paced assignments where speed matters.
-  </p>
-</section>
-<!-- ▲ ここまで -->
-  <!-- ===================== APPS ===================== -->
-  <h2>Apps / アプリ</h2>
-  <hr class="divider">
 
-  <div class="card">
-    <h3>IPTCPhotoSender for the Press</h3>
-    <p class="ink">
-      カメラから無線で写真を受信し、IPTCメタデータを付けてFTPで送信する報道向けアプリ。<br>
-      Receive photos wirelessly from your camera, apply IPTC metadata, and send via FTP — built for press photographers.
-    </p>
-    <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
-  </div>
-  <a class="btn btn-store" href="manual.html">ユーザーガイド / User Guide</a>
-  <div class="card">
-    <h3>FTPReceiver</h3>
-    <p class="ink">
-      FTP送信機能のあるカメラ（Canon・Nikon・Sony など）から写真を受信する FTP サーバーアプリ。<br>
-      An FTP server app that receives photos from cameras with FTP transfer (Canon, Nikon, Sony, and more).
-    </p>
-    <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">App Store で見る / View on App Store</a>
-  </div>
-    <p class="soon">📘 取扱説明書は現在作成中です。近日公開予定。 / User guide is in preparation — coming soon.</p>
-  <!-- ===================== DOWNLOADS ===================== -->
-  <h2>Camera Connection Settings / カメラ接続設定</h2>
-  <p class="section-sub">
-    両アプリ共通でお使いいただけます。 / For use with both apps.
-  </p>
-  <hr class="divider">
+  <!-- ===================== 日本語 ===================== -->
+  <div class="lang-content" data-lang="ja">
+    <p class="tagline">サポート &amp; ダウンロード</p>
 
-  <div class="card">
-    <h3>Canon</h3>
-    <p class="ink">
-      Canon カメラ用の接続設定ファイルです。この設定を対応機種にインストールすると、iPhoneのテザリングを使わずに、カメラとFTPで直接つないで画像を受信できます。<br>
-      Connection setting file for Canon cameras. Install it on a supported body to connect by FTP directly — no iPhone tethering needed.
-    </p>
-    <a class="btn btn-dl" href="downloads/canon01.NIF" download>Download / ダウンロード</a>
-
-    <p class="lang-label">接続手順（日本語）</p>
-    <ol class="steps">
-      <li>ダウンロードした接続設定ファイル（ファイル名：canon01.NIF）をカメラに取り込みます。EOS&nbsp;Utility で読み込むか、ファイルをメモリーカードの最上位階層（ルート）にコピーして、カメラのメニューから読み込みます。</li>
-      <li>iPhone で現在接続している Wi-Fi の「自動接続（Auto-Join）」を<strong>オフ</strong>にしておきます。これをしないと、カメラと接続してもすぐに切断され、自動接続の Wi-Fi に戻ってしまいます（カメラとの接続を優先させるため）。<!-- ▼ 日本語 step 2 の末尾に追加（かんたん接続の注記） -->
-<div style="margin:0.6em 0 0; padding:0.7em 0.9em; border-left:3px solid #0a84ff; background:rgba(10,132,255,0.06); border-radius:5px; font-size:0.95em; line-height:1.7;">
-  <strong>※ IPTCPhotoSender ver3.3 / FTPReceiver v1.8 の「かんたん接続」オンで使用する場合</strong>は、現在接続している Wi-Fi の自動接続をオフにする必要はありません。カメラからの受信を終えてアプリの「受信」をオフ（FTPReceiver ではサーバー「停止」）にし、カメラの FTP 接続もオフにすれば、接続が切断され、カメラと接続する前に接続していた Wi-Fi に接続し直します。
-</div>
-<!-- ▲ ここまで（日本語） --></li>
-      <li>取り込んだ接続設定をカメラに設定し、カメラ側で接続を開始します。</li>
-      <li>iPhone の「設定 → Wi-Fi」を開き、一覧に <span class="kbd">IPTCPS</span> が表示されたらタップして接続します。</li>
-      <li><span class="kbd">IPTCPS</span> の左に接続中アイコン（ぐるぐる）が出たら（このとき Wi-Fi 一覧の最上部に表示されます）、右端の「ⓘ」をタップ →「IPv4アドレスを構成」を<strong>手動</strong>にして、IPアドレス：<span class="kbd">192.168.1.20</span>／サブネットマスク：<span class="kbd">255.255.255.0</span> を入力します。あわせて、この画面で <span class="kbd">IPTCPS</span> の「自動接続（Auto-Join）」を<strong>オン</strong>にします。</li>
-      <li>アプリを開いて「Start」で接続を開始します。カメラの LAN ランプが点滅から点灯に変わります。</li>
-      <li>カメラから送信を開始すると、アプリが写真を受信します。</li>
-    </ol>
-
-    <p class="lang-label">How to connect (English)</p>
-    <ol class="steps">
-      <li>Load the downloaded setting file (File name: canon01.NIF) into your camera — via EOS&nbsp;Utility, or copy the file to the top (root) level of the memory card and import it from the camera menu.</li>
-      <li>On iPhone, turn <strong>OFF</strong> “Auto-Join” for your current Wi-Fi network. Otherwise the iPhone quickly drops the camera connection and switches back to that network. (This gives the camera connection priority.)<!-- ▼ English step 2 の末尾に追加（Quick Connect note） -->
-<div style="margin:0.6em 0 0; padding:0.7em 0.9em; border-left:3px solid #0a84ff; background:rgba(10,132,255,0.06); border-radius:5px; font-size:0.95em; line-height:1.7;">
-  <strong>Note: When using Quick Connect (on) in IPTCPhotoSender ver3.3 / FTPReceiver v1.8</strong>, you do not need to turn off Auto-Join for your current Wi-Fi. After you finish receiving, turn the app&rsquo;s &ldquo;Receive&rdquo; off (in FTPReceiver, &ldquo;Stop&rdquo; the server) and also turn off the camera&rsquo;s FTP connection; the connection is then dropped and your device reconnects to the Wi-Fi it was on before connecting to the camera.
-</div>
-<!-- ▲ end (English) --></li>
-      <li>Select the imported connection setting on the camera and start the connection from the camera.</li>
-      <li>On iPhone, open Settings → Wi-Fi. When <span class="kbd">IPTCPS</span> appears, tap to connect.</li>
-      <li>When the spinner appears next to <span class="kbd">IPTCPS</span> (it moves to the top of the Wi-Fi list), tap the “ⓘ” on the right → set “Configure IP” to <strong>Manual</strong>, then enter IP Address <span class="kbd">192.168.1.20</span> and Subnet Mask <span class="kbd">255.255.255.0</span>. While here, turn <strong>ON</strong> “Auto-Join” for <span class="kbd">IPTCPS</span>.</li>
-      <li>Open the app and tap “Start.” The camera’s LAN lamp changes from blinking to steady.</li>
-      <li>Start sending from the camera, and the app will receive your photos.</li>
-    </ol>
-
-    <div class="callout">
-      <span class="ttl">⚠ セキュリティについて / Security note</span>
-      このダウンロード版の接続設定は、誰でもすぐに使えるよう、iPhone への接続（Wi-Fi）を<strong>パスワード無し</strong>、アプリのサーバー接続を <strong>anonymous（匿名）</strong>に設定しています。このままでも問題なく写真を送受信できますが、ダウンロード後は、できれば Wi-Fi とサーバーの<strong>両方にパスワードを設定</strong>してお使いください。設定は EOS&nbsp;Utility で行うと簡単です。<br><br>
-      To let anyone use it right away, this downloadable setting leaves the iPhone Wi-Fi connection <strong>without a password</strong> and the app’s server login set to <strong>“anonymous.”</strong> It works fine as-is, but after downloading we recommend setting a password for <strong>both the Wi-Fi and the server</strong>. EOS&nbsp;Utility makes this easy.
+    <div class="update">
+      <p class="lead">ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver) よりカメラからの写真受信の操作が容易になりました。</p>
+      <p>基本、二つのアプリケーションでは iPhone / iPad の Personal HotSpot（インターネット共有）を利用してカメラと接続し、写真の受信を行います。これは設定・接続が簡単で、誰もが容易に接続できるためです。しかし実は、カメラ上で iPhone / iPad への接続設定を設定すれば、Personal HotSpot 機能を使用しなくても、カメラと iPhone / iPad を直接接続することが可能です。今までも直接接続は可能でしたが、今回の ver3.3 / ver1.8 により、直接接続は確実でとても簡単にできるようになりました。</p>
+      <p>下記にある「カメラ接続設定」を利用するか、ご自分で接続設定を作成し、カメラに設定してアプリの受信タブ（かんたん接続）にて受信設定し利用すると、スピード感が重要な取材中に、ストレス無く撮影した写真をカメラから iPhone / iPad に受け渡し・送信することができます。</p>
     </div>
 
-    <p class="note">
-      対応機種 / Supported: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C
-    </p>
+    <h2>アプリ</h2>
+    <hr class="divider">
+    <div class="card">
+      <h3>IPTCPhotoSender for the Press</h3>
+      <p class="ink">カメラから無線で写真を受信し、IPTCメタデータを付けてFTPで送信する報道向けアプリ。</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">App Store で見る</a>
+    </div>
+    <a class="btn btn-store" href="manual.html">ユーザーガイド</a>
+    <div class="card">
+      <h3>FTPReceiver</h3>
+      <p class="ink">FTP送信機能のあるカメラ（Canon・Nikon・Sony など）から写真を受信する FTP サーバーアプリ。</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">App Store で見る</a>
+    </div>
+    <p class="soon">📘 取扱説明書は現在作成中です。近日公開予定。</p>
+
+    <h2>カメラ接続設定</h2>
+    <p class="section-sub">両アプリ共通でお使いいただけます。</p>
+    <hr class="divider">
+    <div class="card">
+      <h3>Canon</h3>
+      <p class="ink">Canon カメラ用の接続設定ファイルです。この設定を対応機種にインストールすると、iPhoneのテザリングを使わずに、カメラとFTPで直接つないで画像を受信できます。</p>
+      <a class="btn btn-dl" href="downloads/canon01.NIF" download>ダウンロード</a>
+
+      <p class="lang-label">接続手順</p>
+      <ol class="steps">
+        <li>ダウンロードした接続設定ファイル（ファイル名：canon01.NIF）をカメラに取り込みます。EOS&nbsp;Utility で読み込むか、ファイルをメモリーカードの最上位階層（ルート）にコピーして、カメラのメニューから読み込みます。</li>
+        <li>iPhone で現在接続している Wi-Fi の「自動接続（Auto-Join）」を<strong>オフ</strong>にしておきます。これをしないと、カメラと接続してもすぐに切断され、自動接続の Wi-Fi に戻ってしまいます（カメラとの接続を優先させるため）。
+          <div class="qnote"><strong>※ IPTCPhotoSender ver3.3 / FTPReceiver v1.8 の「かんたん接続」オンで使用する場合</strong>は、現在接続している Wi-Fi の自動接続をオフにする必要はありません。カメラからの受信を終えてアプリの「受信」をオフ（FTPReceiver ではサーバー「停止」）にし、カメラの FTP 接続もオフにすれば、接続が切断され、カメラと接続する前に接続していた Wi-Fi に接続し直します。</div>
+        </li>
+        <li>取り込んだ接続設定をカメラに設定し、カメラ側で接続を開始します。</li>
+        <li>iPhone の「設定 → Wi-Fi」を開き、一覧に <span class="kbd">IPTCPS</span> が表示されたらタップして接続します。</li>
+        <li><span class="kbd">IPTCPS</span> の左に接続中アイコン（ぐるぐる）が出たら（このとき Wi-Fi 一覧の最上部に表示されます）、右端の「ⓘ」をタップ →「IPv4アドレスを構成」を<strong>手動</strong>にして、IPアドレス：<span class="kbd">192.168.1.20</span>／サブネットマスク：<span class="kbd">255.255.255.0</span> を入力します。あわせて、この画面で <span class="kbd">IPTCPS</span> の「自動接続（Auto-Join）」を<strong>オン</strong>にします。</li>
+        <li>アプリを開いて「Start」で接続を開始します。カメラの LAN ランプが点滅から点灯に変わります。</li>
+        <li>カメラから送信を開始すると、アプリが写真を受信します。</li>
+      </ol>
+
+      <div class="callout">
+        <span class="ttl">⚠ セキュリティについて</span>
+        このダウンロード版の接続設定は、誰でもすぐに使えるよう、iPhone への接続（Wi-Fi）を<strong>パスワード無し</strong>、アプリのサーバー接続を <strong>anonymous（匿名）</strong>に設定しています。このままでも問題なく写真を送受信できますが、ダウンロード後は、できれば Wi-Fi とサーバーの<strong>両方にパスワードを設定</strong>してお使いください。設定は EOS&nbsp;Utility で行うと簡単です。
+      </div>
+
+      <p class="note">対応機種：EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C</p>
+    </div>
+    <p class="soon">Nikon・Sony 用は準備中です。</p>
+
+    <h2>お問い合わせ</h2>
+    <hr class="divider">
+    <div class="card">
+      <p class="ink">ご質問・ご要望はこちらまで：<br>
+        <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a></p>
+    </div>
   </div>
 
-  <p class="soon">Nikon・Sony 用は準備中です。 / Nikon &amp; Sony settings are coming soon.</p>
+  <!-- ===================== English ===================== -->
+  <div class="lang-content" data-lang="en">
+    <p class="tagline">Support &amp; Downloads</p>
 
-  <!-- ===================== SUPPORT ===================== -->
-  <h2>Support / お問い合わせ</h2>
-  <hr class="divider">
-  <div class="card">
-    <p class="ink">
-      ご質問・ご要望はこちらまで： / Questions or feedback:<br>
-      <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a>
-    </p>
+    <div class="update">
+      <p class="lead">Receiving photos from your camera is now easier, starting with ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver).</p>
+      <p>By default, both apps connect to your camera using the iPhone / iPad Personal Hotspot (Internet Sharing) to receive photos, because it is simple to set up and anyone can connect easily. In fact, however, if you configure the connection to your iPhone / iPad on the camera itself, you can connect the camera and your iPhone / iPad directly — without using Personal Hotspot. Direct connection was always possible, but ver3.3 / ver1.8 now make it reliable and very easy.</p>
+      <p>Use the “Camera Connection Settings” below, or create your own connection profile and set it on the camera, then set it up on the app’s Receive tab (Quick Connect). You can then hand off and send the photos you shoot from the camera to your iPhone / iPad smoothly — without stress — during fast-paced assignments where speed matters.</p>
+    </div>
+
+    <h2>Apps</h2>
+    <hr class="divider">
+    <div class="card">
+      <h3>IPTCPhotoSender for the Press</h3>
+      <p class="ink">Receive photos wirelessly from your camera, apply IPTC metadata, and send via FTP — built for press photographers.</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">View on App Store</a>
+    </div>
+    <a class="btn btn-store" href="manual.html">User Guide</a>
+    <div class="card">
+      <h3>FTPReceiver</h3>
+      <p class="ink">An FTP server app that receives photos from cameras with FTP transfer (Canon, Nikon, Sony, and more).</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">View on App Store</a>
+    </div>
+    <p class="soon">📘 User guide is in preparation — coming soon.</p>
+
+    <h2>Camera Connection Settings</h2>
+    <p class="section-sub">For use with both apps.</p>
+    <hr class="divider">
+    <div class="card">
+      <h3>Canon</h3>
+      <p class="ink">Connection setting file for Canon cameras. Install it on a supported body to connect by FTP directly — no iPhone tethering needed.</p>
+      <a class="btn btn-dl" href="downloads/canon01.NIF" download>Download</a>
+
+      <p class="lang-label">How to connect</p>
+      <ol class="steps">
+        <li>Load the downloaded setting file (File name: canon01.NIF) into your camera — via EOS&nbsp;Utility, or copy the file to the top (root) level of the memory card and import it from the camera menu.</li>
+        <li>On iPhone, turn <strong>OFF</strong> “Auto-Join” for your current Wi-Fi network. Otherwise the iPhone quickly drops the camera connection and switches back to that network. (This gives the camera connection priority.)
+          <div class="qnote"><strong>Note: When using Quick Connect (on) in IPTCPhotoSender ver3.3 / FTPReceiver v1.8</strong>, you do not need to turn off Auto-Join for your current Wi-Fi. After you finish receiving, turn the app’s “Receive” off (in FTPReceiver, “Stop” the server) and also turn off the camera’s FTP connection; the connection is then dropped and your device reconnects to the Wi-Fi it was on before connecting to the camera.</div>
+        </li>
+        <li>Select the imported connection setting on the camera and start the connection from the camera.</li>
+        <li>On iPhone, open Settings → Wi-Fi. When <span class="kbd">IPTCPS</span> appears, tap to connect.</li>
+        <li>When the spinner appears next to <span class="kbd">IPTCPS</span> (it moves to the top of the Wi-Fi list), tap the “ⓘ” on the right → set “Configure IP” to <strong>Manual</strong>, then enter IP Address <span class="kbd">192.168.1.20</span> and Subnet Mask <span class="kbd">255.255.255.0</span>. While here, turn <strong>ON</strong> “Auto-Join” for <span class="kbd">IPTCPS</span>.</li>
+        <li>Open the app and tap “Start.” The camera’s LAN lamp changes from blinking to steady.</li>
+        <li>Start sending from the camera, and the app will receive your photos.</li>
+      </ol>
+
+      <div class="callout">
+        <span class="ttl">⚠ Security note</span>
+        To let anyone use it right away, this downloadable setting leaves the iPhone Wi-Fi connection <strong>without a password</strong> and the app’s server login set to <strong>“anonymous.”</strong> It works fine as-is, but after downloading we recommend setting a password for <strong>both the Wi-Fi and the server</strong>. EOS&nbsp;Utility makes this easy.
+      </div>
+
+      <p class="note">Supported: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C</p>
+    </div>
+    <p class="soon">Nikon &amp; Sony settings are coming soon.</p>
+
+    <h2>Support</h2>
+    <hr class="divider">
+    <div class="card">
+      <p class="ink">Questions or feedback:<br>
+        <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a></p>
+    </div>
+  </div>
+
+  <!-- ===================== Italiano ===================== -->
+  <div class="lang-content" data-lang="it">
+    <p class="tagline">Supporto e download</p>
+
+    <div class="update">
+      <p class="lead">Dalla ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver), ricevere le foto dalla fotocamera è diventato più facile.</p>
+      <p>Per impostazione predefinita, entrambe le app si collegano alla fotocamera tramite l'Hotspot personale (Rete condivisa) dell'iPhone / iPad per ricevere le foto, perché è semplice da configurare e chiunque può collegarsi facilmente. In realtà, però, se configuri sulla fotocamera stessa la connessione verso l'iPhone / iPad, puoi collegare la fotocamera e l'iPhone / iPad direttamente, senza usare l'Hotspot personale. La connessione diretta è sempre stata possibile, ma la ver3.3 / ver1.8 la rende ora affidabile e molto semplice.</p>
+      <p>Usa le “Impostazioni di connessione della fotocamera” qui sotto, oppure crea il tuo profilo di connessione e impostalo sulla fotocamera, poi configuralo nella scheda “Ricezione” dell'app (Connessione rapida). Potrai così trasferire e inviare le foto scattate dalla fotocamera all'iPhone / iPad in modo fluido e senza stress, durante i servizi a ritmo serrato in cui la velocità è fondamentale.</p>
+    </div>
+
+    <h2>App</h2>
+    <hr class="divider">
+    <div class="card">
+      <h3>IPTCPhotoSender for the Press</h3>
+      <p class="ink">Ricevi le foto in modalità wireless dalla fotocamera, aggiungi i metadati IPTC e invia via FTP: pensata per i fotografi di cronaca.</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">Vedi su App Store</a>
+    </div>
+    <a class="btn btn-store" href="manual.html">Guida utente</a>
+    <div class="card">
+      <h3>FTPReceiver</h3>
+      <p class="ink">Un'app server FTP che riceve le foto dalle fotocamere con trasferimento FTP (Canon, Nikon, Sony e altre).</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">Vedi su App Store</a>
+    </div>
+    <p class="soon">📘 La guida utente è in preparazione: disponibile a breve.</p>
+
+    <h2>Impostazioni di connessione della fotocamera</h2>
+    <p class="section-sub">Utilizzabili con entrambe le app.</p>
+    <hr class="divider">
+    <div class="card">
+      <h3>Canon</h3>
+      <p class="ink">File di impostazioni di connessione per le fotocamere Canon. Installalo su un corpo macchina compatibile per collegarti via FTP direttamente, senza tethering dell'iPhone.</p>
+      <a class="btn btn-dl" href="downloads/canon01.NIF" download>Scarica</a>
+
+      <p class="lang-label">Come connettersi</p>
+      <ol class="steps">
+        <li>Carica nella fotocamera il file di impostazioni scaricato (nome file: canon01.NIF), tramite EOS&nbsp;Utility, oppure copia il file nel livello principale (root) della scheda di memoria e importalo dal menu della fotocamera.</li>
+        <li>Sull'iPhone, disattiva (<strong>OFF</strong>) “Accesso automatico” (Auto-Join) per la rete Wi-Fi attualmente connessa. In caso contrario l'iPhone interrompe rapidamente la connessione con la fotocamera e torna a quella rete. (In questo modo la connessione con la fotocamera ha la priorità.)
+          <div class="qnote"><strong>Nota: se usi la “Connessione rapida” (attiva) in IPTCPhotoSender ver3.3 / FTPReceiver v1.8</strong>, non è necessario disattivare l'Accesso automatico della rete Wi-Fi attuale. Al termine della ricezione, disattiva la “Ricezione” nell'app (in FTPReceiver, “Arresta” il server) e disattiva anche la connessione FTP della fotocamera: la connessione verrà interrotta e il dispositivo si ricollegherà alla rete Wi-Fi a cui era connesso prima di collegarsi alla fotocamera.</div>
+        </li>
+        <li>Seleziona sulla fotocamera l'impostazione di connessione importata e avvia la connessione dalla fotocamera.</li>
+        <li>Sull'iPhone, apri Impostazioni → Wi-Fi. Quando compare <span class="kbd">IPTCPS</span>, toccalo per connetterti.</li>
+        <li>Quando accanto a <span class="kbd">IPTCPS</span> compare l'indicatore di caricamento (in questo momento si sposta in cima all'elenco Wi-Fi), tocca la “ⓘ” a destra → imposta “Configura IP” su <strong>Manuale</strong>, quindi inserisci Indirizzo IP <span class="kbd">192.168.1.20</span> e Maschera di sottorete <span class="kbd">255.255.255.0</span>. Da qui, attiva (<strong>ON</strong>) anche l'“Accesso automatico” (Auto-Join) per <span class="kbd">IPTCPS</span>.</li>
+        <li>Apri l'app e tocca “Start” per avviare la connessione. La spia LAN della fotocamera passa da lampeggiante a fissa.</li>
+        <li>Avvia l'invio dalla fotocamera e l'app riceverà le tue foto.</li>
+      </ol>
+
+      <div class="callout">
+        <span class="ttl">⚠ Nota sulla sicurezza</span>
+        Per consentire a chiunque di usarlo subito, questa impostazione scaricabile lascia la connessione Wi-Fi all'iPhone <strong>senza password</strong> e l'accesso al server dell'app impostato su <strong>“anonymous” (anonimo)</strong>. Funziona senza problemi così com'è, ma dopo il download consigliamo di impostare una password <strong>sia per il Wi-Fi sia per il server</strong>. Con EOS&nbsp;Utility è semplice.
+      </div>
+
+      <p class="note">Compatibilità: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C</p>
+    </div>
+    <p class="soon">Le impostazioni per Nikon e Sony saranno disponibili a breve.</p>
+
+    <h2>Assistenza</h2>
+    <hr class="divider">
+    <div class="card">
+      <p class="ink">Domande o suggerimenti:<br>
+        <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a></p>
+    </div>
+  </div>
+
+  <!-- ===================== Español ===================== -->
+  <div class="lang-content" data-lang="es">
+    <p class="tagline">Soporte y descargas</p>
+
+    <div class="update">
+      <p class="lead">Desde la ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver), recibir las fotos desde la cámara es más fácil.</p>
+      <p>De forma predeterminada, ambas apps se conectan a la cámara mediante la función Compartir Internet (Hotspot personal) del iPhone / iPad para recibir las fotos, porque es sencillo de configurar y cualquiera puede conectarse con facilidad. Sin embargo, si configuras en la propia cámara la conexión hacia el iPhone / iPad, puedes conectar la cámara y el iPhone / iPad directamente, sin usar Compartir Internet. La conexión directa siempre fue posible, pero la ver3.3 / ver1.8 ahora la hace fiable y muy fácil.</p>
+      <p>Usa los “Ajustes de conexión de la cámara” de abajo, o crea tu propio perfil de conexión y configúralo en la cámara; luego ajústalo en la pestaña “Recepción” de la app (Conexión rápida). Así podrás pasar y enviar las fotos que tomas desde la cámara al iPhone / iPad con fluidez y sin estrés, durante coberturas de ritmo rápido en las que la velocidad es clave.</p>
+    </div>
+
+    <h2>Aplicaciones</h2>
+    <hr class="divider">
+    <div class="card">
+      <h3>IPTCPhotoSender for the Press</h3>
+      <p class="ink">Recibe fotos de forma inalámbrica desde la cámara, añade metadatos IPTC y envía por FTP: creada para fotógrafos de prensa.</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">Ver en el App Store</a>
+    </div>
+    <a class="btn btn-store" href="manual.html">Guía del usuario</a>
+    <div class="card">
+      <h3>FTPReceiver</h3>
+      <p class="ink">Una app de servidor FTP que recibe fotos de cámaras con transferencia FTP (Canon, Nikon, Sony y más).</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">Ver en el App Store</a>
+    </div>
+    <p class="soon">📘 La guía del usuario está en preparación: disponible pronto.</p>
+
+    <h2>Ajustes de conexión de la cámara</h2>
+    <p class="section-sub">Para usar con ambas apps.</p>
+    <hr class="divider">
+    <div class="card">
+      <h3>Canon</h3>
+      <p class="ink">Archivo de ajustes de conexión para cámaras Canon. Instálalo en un cuerpo compatible para conectar por FTP directamente, sin necesidad de compartir conexión del iPhone.</p>
+      <a class="btn btn-dl" href="downloads/canon01.NIF" download>Descargar</a>
+
+      <p class="lang-label">Cómo conectar</p>
+      <ol class="steps">
+        <li>Carga en la cámara el archivo de ajustes descargado (nombre: canon01.NIF), mediante EOS&nbsp;Utility, o copia el archivo al nivel superior (raíz) de la tarjeta de memoria e impórtalo desde el menú de la cámara.</li>
+        <li>En el iPhone, desactiva (<strong>OFF</strong>) la “Conexión automática” (Auto-Join) de la red Wi-Fi a la que estás conectado. De lo contrario, el iPhone abandona rápidamente la conexión con la cámara y vuelve a esa red. (Así se da prioridad a la conexión con la cámara.)
+          <div class="qnote"><strong>Nota: si usas la “Conexión rápida” (activada) en IPTCPhotoSender ver3.3 / FTPReceiver v1.8</strong>, no necesitas desactivar la Conexión automática de tu Wi-Fi actual. Cuando termines de recibir, desactiva “Recepción” en la app (en FTPReceiver, “Detén” el servidor) y desactiva también la conexión FTP de la cámara: la conexión se cerrará y el dispositivo volverá a conectarse a la red Wi-Fi en la que estaba antes de conectarse a la cámara.</div>
+        </li>
+        <li>Selecciona en la cámara el ajuste de conexión importado e inicia la conexión desde la cámara.</li>
+        <li>En el iPhone, abre Ajustes → Wi-Fi. Cuando aparezca <span class="kbd">IPTCPS</span>, tócalo para conectarte.</li>
+        <li>Cuando aparezca el indicador de carga junto a <span class="kbd">IPTCPS</span> (en ese momento se coloca arriba del todo de la lista de Wi-Fi), toca la “ⓘ” de la derecha → pon “Configurar IP” en <strong>Manual</strong> e introduce la Dirección IP <span class="kbd">192.168.1.20</span> y la Máscara de subred <span class="kbd">255.255.255.0</span>. Desde aquí, activa (<strong>ON</strong>) también la “Conexión automática” (Auto-Join) de <span class="kbd">IPTCPS</span>.</li>
+        <li>Abre la app y toca “Start” para iniciar la conexión. La luz LAN de la cámara pasa de parpadear a quedar fija.</li>
+        <li>Inicia el envío desde la cámara y la app recibirá tus fotos.</li>
+      </ol>
+
+      <div class="callout">
+        <span class="ttl">⚠ Nota de seguridad</span>
+        Para que cualquiera pueda usarlo de inmediato, este ajuste descargable deja la conexión Wi-Fi del iPhone <strong>sin contraseña</strong> y el acceso al servidor de la app como <strong>“anonymous” (anónimo)</strong>. Funciona bien así, pero después de descargarlo recomendamos poner una contraseña <strong>tanto para el Wi-Fi como para el servidor</strong>. Con EOS&nbsp;Utility es sencillo.
+      </div>
+
+      <p class="note">Compatibles: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C</p>
+    </div>
+    <p class="soon">Los ajustes para Nikon y Sony estarán disponibles pronto.</p>
+
+    <h2>Soporte</h2>
+    <hr class="divider">
+    <div class="card">
+      <p class="ink">Preguntas o comentarios:<br>
+        <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a></p>
+    </div>
+  </div>
+
+  <!-- ===================== 한국어 ===================== -->
+  <div class="lang-content" data-lang="ko">
+    <p class="tagline">지원 및 다운로드</p>
+
+    <div class="update">
+      <p class="lead">ver3.3 (IPTCPhotoSender) / ver1.8 (FTPReceiver)부터 카메라에서 사진을 받는 조작이 쉬워졌습니다.</p>
+      <p>기본적으로 두 앱은 iPhone / iPad의 개인용 핫스팟(인터넷 공유)을 이용해 카메라와 연결하여 사진을 받습니다. 설정·연결이 간단하여 누구나 쉽게 연결할 수 있기 때문입니다. 하지만 사실 카메라에서 iPhone / iPad로의 연결 설정을 해 두면, 개인용 핫스팟 기능을 사용하지 않고도 카메라와 iPhone / iPad를 직접 연결할 수 있습니다. 지금까지도 직접 연결은 가능했지만, 이번 ver3.3 / ver1.8로 직접 연결이 확실하고 매우 간단해졌습니다.</p>
+      <p>아래의 “카메라 연결 설정”을 이용하거나, 직접 연결 설정을 만들어 카메라에 설정한 뒤 앱의 “수신” 탭(간편 연결)에서 수신 설정을 하여 사용하면, 속도가 중요한 취재 중에 스트레스 없이 촬영한 사진을 카메라에서 iPhone / iPad로 전달·전송할 수 있습니다.</p>
+    </div>
+
+    <h2>앱</h2>
+    <hr class="divider">
+    <div class="card">
+      <h3>IPTCPhotoSender for the Press</h3>
+      <p class="ink">카메라에서 무선으로 사진을 받아 IPTC 메타데이터를 넣고 FTP로 전송하는 보도용 앱.</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/iptcphotosender/id6783327525" target="_blank" rel="noopener">App Store에서 보기</a>
+    </div>
+    <a class="btn btn-store" href="manual.html">사용 설명서</a>
+    <div class="card">
+      <h3>FTPReceiver</h3>
+      <p class="ink">FTP 전송 기능이 있는 카메라(Canon·Nikon·Sony 등)에서 사진을 받는 FTP 서버 앱.</p>
+      <a class="btn btn-store" href="https://apps.apple.com/us/app/ftpreceiver/id6784591295" target="_blank" rel="noopener">App Store에서 보기</a>
+    </div>
+    <p class="soon">📘 사용 설명서는 현재 준비 중입니다. 곧 공개 예정.</p>
+
+    <h2>카메라 연결 설정</h2>
+    <p class="section-sub">두 앱 모두에서 사용할 수 있습니다.</p>
+    <hr class="divider">
+    <div class="card">
+      <h3>Canon</h3>
+      <p class="ink">Canon 카메라용 연결 설정 파일입니다. 이 설정을 지원 기종에 설치하면 iPhone 테더링을 사용하지 않고 카메라와 FTP로 직접 연결하여 이미지를 받을 수 있습니다.</p>
+      <a class="btn btn-dl" href="downloads/canon01.NIF" download>다운로드</a>
+
+      <p class="lang-label">연결 방법</p>
+      <ol class="steps">
+        <li>다운로드한 연결 설정 파일(파일명: canon01.NIF)을 카메라에 불러옵니다. EOS&nbsp;Utility로 읽어들이거나, 파일을 메모리 카드의 최상위(루트)에 복사한 뒤 카메라 메뉴에서 불러옵니다.</li>
+        <li>iPhone에서 현재 연결 중인 Wi-Fi의 “자동 연결(Auto-Join)”을 <strong>끔(OFF)</strong>으로 해 둡니다. 그렇게 하지 않으면 카메라와 연결해도 금방 끊기고 자동 연결 Wi-Fi로 돌아가 버립니다(카메라 연결을 우선하기 위해).
+          <div class="qnote"><strong>※ IPTCPhotoSender ver3.3 / FTPReceiver v1.8의 “간편 연결”을 켜고 사용하는 경우</strong>에는 현재 연결 중인 Wi-Fi의 자동 연결을 끌 필요가 없습니다. 카메라에서 수신을 마친 뒤 앱의 “수신”을 끄고(FTPReceiver에서는 서버 “정지”), 카메라의 FTP 연결도 끄면 연결이 끊어지고, 카메라와 연결하기 전에 사용하던 Wi-Fi로 다시 연결됩니다.</div>
+        </li>
+        <li>불러온 연결 설정을 카메라에 지정하고, 카메라에서 연결을 시작합니다.</li>
+        <li>iPhone의 “설정 → Wi-Fi”를 열고, 목록에 <span class="kbd">IPTCPS</span>가 표시되면 탭하여 연결합니다.</li>
+        <li><span class="kbd">IPTCPS</span> 왼쪽에 연결 중 아이콘(빙글빙글)이 나타나면(이때 Wi-Fi 목록 맨 위에 표시됩니다), 오른쪽 끝의 “ⓘ”를 탭 → “IP 구성”을 <strong>수동</strong>으로 하고, IP 주소: <span class="kbd">192.168.1.20</span> / 서브넷 마스크: <span class="kbd">255.255.255.0</span>를 입력합니다. 이 화면에서 <span class="kbd">IPTCPS</span>의 “자동 연결(Auto-Join)”도 <strong>켬(ON)</strong>으로 설정합니다.</li>
+        <li>앱을 열고 “Start”로 연결을 시작합니다. 카메라의 LAN 램프가 깜박임에서 켜짐으로 바뀝니다.</li>
+        <li>카메라에서 전송을 시작하면 앱이 사진을 받습니다.</li>
+      </ol>
+
+      <div class="callout">
+        <span class="ttl">⚠ 보안에 대하여</span>
+        이 다운로드 버전의 연결 설정은 누구나 바로 사용할 수 있도록 iPhone 연결(Wi-Fi)을 <strong>비밀번호 없음</strong>, 앱의 서버 접속을 <strong>anonymous(익명)</strong>로 설정해 두었습니다. 이대로도 문제없이 사진을 주고받을 수 있지만, 다운로드 후에는 가능하면 Wi-Fi와 서버 <strong>양쪽 모두에 비밀번호를 설정</strong>하여 사용하시기 바랍니다. 설정은 EOS&nbsp;Utility로 하면 간단합니다.
+      </div>
+
+      <p class="note">지원 기종: EOS-1D X Mark III, R1, R3, R5, R5 Mark II, R5 C</p>
+    </div>
+    <p class="soon">Nikon·Sony용은 준비 중입니다.</p>
+
+    <h2>문의</h2>
+    <hr class="divider">
+    <div class="card">
+      <p class="ink">질문·요청은 이쪽으로:<br>
+        <a href="mailto:support.iptcphotosender@gmail.com">support.iptcphotosender@gmail.com</a></p>
+    </div>
   </div>
 
   <footer>
@@ -221,5 +442,31 @@
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var SUP = ['ja','en','it','es','ko'];
+  var sel = document.getElementById('langSelect');
+  function apply(l){
+    if(SUP.indexOf(l) < 0) l = 'en';
+    var blocks = document.querySelectorAll('.lang-content');
+    for(var i=0;i<blocks.length;i++){
+      blocks[i].classList.toggle('active', blocks[i].getAttribute('data-lang') === l);
+    }
+    document.documentElement.lang = l;
+    if(sel) sel.value = l;
+    try{ localStorage.setItem('appSupportLang', l); }catch(e){}
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('appSupportLang'); }catch(e){}
+  if(!saved){
+    var nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+    saved = SUP.indexOf(nav) >= 0 ? nav : 'en';
+  }
+  if(sel){ sel.addEventListener('change', function(){ apply(sel.value); }); }
+  apply(saved);
+})();
+</script>
+
 </body>
 </html>
