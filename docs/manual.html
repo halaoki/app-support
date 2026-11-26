@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,14 +24,12 @@
   .backlink{display:inline-block; margin:0 0 14px; color:var(--accent2); text-decoration:none; font-size:.95rem}
   .backlink:hover{text-decoration:underline}
 
-  /* 言語トグル */
-  .lang-toggle{display:flex; gap:8px; justify-content:center; margin:18px 0 6px}
-  .lang-toggle button{
-    font:inherit; font-size:.98rem; font-weight:600; cursor:pointer;
-    padding:8px 20px; border-radius:999px; border:1px solid var(--line);
-    background:#20242d; color:var(--sub);
+  /* 言語切替（プルダウン） */
+  .langbar{margin:18px 0 6px; text-align:center; font-size:1rem; color:var(--sub)}
+  .langbar select{
+    font:inherit; font-size:1rem; color:var(--ink); background:var(--card);
+    border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-left:6px;
   }
-  .lang-toggle button.active{background:var(--accent); color:#fff; border-color:var(--accent)}
 
   /* 目次 */
   .toc{
@@ -101,15 +99,20 @@
     <p class="tagline">IPTCPhotoSender for the Press</p>
   </header>
 
-  <div class="lang-toggle" role="group" aria-label="Language">
-    <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
-    <button id="btn-en" onclick="setLang('en')">English</button>
+  <div class="langbar">🌐
+    <select id="langSelect" aria-label="Language">
+      <option value="ja">日本語</option>
+      <option value="en">English</option>
+      <option value="it">Italiano</option>
+      <option value="es">Español</option>
+      <option value="ko">한국어</option>
+    </select>
   </div>
 
   <!-- ============================================================= -->
   <!-- 日本語                                                         -->
   <!-- ============================================================= -->
-  <section id="guide-ja">
+  <section id="guide-ja" hidden>
 
     <nav class="toc">
       <h2>目次</h2>
@@ -161,7 +164,7 @@
       <b>ボイスタグ（音声メモ）について</b><br>
       カメラで写真に録音した音声説明（ボイスタグ）は、写真とペアで受信されます。Photos・Sent どちらのタブでも、写真の編集画面で再生して内容を確認できます。ボイスタグが付いている写真は、両タブの一覧でファイル名の横に紫のマイクアイコンが表示されるので、ひと目で音声付きと分かります。送信時には写真に紐付けたまま、ペアで送稿先へ送られるので、音声での指示やメモを写真と一緒にそのまま届けられます。
     </div>
-    
+
     <div class="note">
       <b>送信中の画面ロックについて</b><br>
       ・送信中に iPhone 本体をロック（スリープ）すると、送信は止まってしまいます。そのため、送信中は自動ロック（自動スリープ）が働かないようにしています。<br>
@@ -263,7 +266,7 @@
   <!-- ============================================================= -->
   <!-- English                                                        -->
   <!-- ============================================================= -->
-  <section id="guide-en" hidden>
+  <section id="guide-en">
 
     <nav class="toc">
       <h2>Contents</h2>
@@ -315,7 +318,7 @@
       <b>About voice tags (audio memos)</b><br>
       A voice annotation you recorded on the camera (a voice tag) is received paired with its photo. You can play it back to check it on the photo editing screen, in both the Photos and the Sent tab. Photos that have a voice tag show a purple microphone icon next to the file name in both tabs, so you can spot audio-tagged shots at a glance. When you send, it is delivered to the picture desk together with the photo, still linked as a pair — so your spoken notes and instructions travel with the image.
     </div>
-    
+
     <div class="note">
       <b>About locking the screen while sending</b><br>
       ・If you lock (put to sleep) the iPhone itself while sending, the transfer stops. For this reason, auto-lock (auto-sleep) is disabled while sending.<br>
@@ -329,8 +332,8 @@
 
    <figure>
   <div style="display:flex; gap:12px; flex-wrap:wrap">
-    <img class="shot" src="images/photose1.png" alt=“Photos Tab” style="flex:1; min-width:0; width:auto">
-    <img class="shot" src="images/photose2.png" alt=“Photos Tab now editing” style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/photose1.png" alt="Photos Tab" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/photose2.png" alt="Photos Tab now editing" style="flex:1; min-width:0; width:auto">
   </div>
   <figcaption>Photos Tab Editing Screen</figcaption>
 </figure>
@@ -414,6 +417,468 @@
 
   </section>
 
+  <!-- ============================================================= -->
+  <!-- Italiano                                                       -->
+  <!-- ============================================================= -->
+  <section id="guide-it" hidden>
+
+    <nav class="toc">
+      <h2>Contenuti</h2>
+      <ol>
+        <li><a href="#it-photos">Scheda Photos</a></li>
+        <li><a href="#it-sent">Scheda Sent</a></li>
+        <li><a href="#it-template">Scheda Template</a></li>
+        <li><a href="#it-receive">Scheda Receive</a></li>
+        <li><a href="#it-more">Scheda More</a></li>
+      </ol>
+    </nav>
+
+    <p>Un flusso di lavoro wireless tutto-in-uno per fotografi di cronaca e sportivi: ricevi le foto dalla fotocamera, aggiungi i metadati IPTC (didascalie) e inviale alla redazione via FTP, tutto su un solo iPhone o iPad. Questa guida illustra una per una ciascuna scheda.</p>
+
+    <!-- Photos -->
+    <h2 class="sec" id="it-photos">Scheda Photos</h2>
+    <hr class="sec-rule">
+    <p>La scheda principale, dove registri le foto da inviare, aggiungi i loro metadati e le invii.</p>
+
+    <figure>
+      <img class="shot" src="images/photos.png" alt="Scheda Photos">
+      <figcaption>Scheda Photos</figcaption>
+    </figure>
+
+    <p><span class="ctrl">Add Photos</span> / il pulsante «+»<br>
+    Pulsanti per registrare le foto che vuoi inviare. Quando non è registrata alcuna foto, al centro dello schermo compare «Add Photos». Appena viene registrata almeno una foto, «Add Photos» scompare e per aggiungerne altre usi il pulsante «+» nell'angolo in alto a destra.</p>
+
+    <p><span class="ctrl">Edit</span> (in alto a sinistra)<br>
+    Seleziona le foto nella scheda per eliminarle, applicare loro un modello (template) o inviare solo le foto selezionate (Send Selected). Puoi anche inviare una singola foto dalla schermata di modifica che si apre toccando una foto.</p>
+
+    <p><span class="ctrl">…</span> (in alto a destra)<br>
+    Applica un unico modello a tutte le foto attualmente nella scheda in una sola volta. Da qui puoi anche eliminare tutte le foto.</p>
+
+    <p><span class="ctrl">Receive</span> (in alto al centro)<br>
+    Riceve le foto inviate dalla fotocamera (attiva il server integrato).</p>
+    <ul>
+      <li>Puoi ricevere tramite la funzione di tethering (Hotspot personale) dell'iPhone.</li>
+      <li>In alternativa, se crei un file di impostazioni di connessione FTP sulla fotocamera, puoi collegarti direttamente alla fotocamera e ricevere senza usare il tethering. Le impostazioni di connessione per le fotocamere Canon (modelli compatibili) si possono scaricare gratuitamente dalla pagina di Supporto.</li>
+      <li>Le impostazioni per Nikon e Sony saranno aggiunte in seguito.</li>
+    </ul>
+
+    <p><span class="ctrl">Selettore dei modelli</span> (sotto Receive, al centro)<br>
+    Quando ricevi le foto con Receive, vengono importate con il modello qui selezionato già applicato. (Dopo la ricezione, puoi riapplicare un modello diverso tutte le volte che vuoi da Edit.)</p>
+
+    <p><span class="ctrl">Pulsante Embed IPTC &amp; Send via FTP</span> (sopra la barra delle schede in basso)<br>
+    Finalizza il modello (metadati della didascalia) applicato alle foto e avvia l'invio via FTP. La destinazione FTP attualmente selezionata è mostrata appena sopra questo pulsante.</p>
+
+    <div class="note">
+      <b>Informazioni sui tag vocali (promemoria audio)</b><br>
+      Un'annotazione vocale registrata sulla fotocamera (un tag vocale) viene ricevuta in coppia con la sua foto. Puoi riprodurla per verificarla nella schermata di modifica della foto, sia nella scheda Photos sia nella scheda Sent. Le foto che hanno un tag vocale mostrano un'icona di microfono viola accanto al nome del file in entrambe le schede, così puoi individuare a colpo d'occhio gli scatti con audio. Quando invii, viene consegnata alla redazione insieme alla foto, ancora collegata come coppia: così le tue note e indicazioni vocali viaggiano con l'immagine.
+    </div>
+
+    <div class="note">
+      <b>Informazioni sul blocco dello schermo durante l'invio</b><br>
+      ・Se blocchi (metti in standby) l'iPhone stesso durante l'invio, il trasferimento si interrompe. Per questo motivo, il blocco automatico (standby automatico) è disattivato durante l'invio.<br>
+      ・Per evitare tocchi accidentali durante un trasferimento, in alto al centro compare un'icona a forma di lucchetto. Toccala per bloccare «in modo morbido» lo schermo. <b>Un blocco morbido NON interrompe il trasferimento.</b> Puoi mettere il telefono in tasca senza attivare nulla per errore.<br>
+      ・Per rilasciare il blocco morbido, usa la barra a scorrimento che compare in basso sullo schermo.<br>
+      ・Durante il blocco morbido, lo stato attuale del trasferimento (foto inviate, foto rimanenti e così via) è mostrato al centro dello schermo.
+    </div>
+
+    <h3>Schermata di modifica della foto</h3>
+    <p>Tocca la miniatura di una foto registrata per aprire la sua schermata di modifica.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/photose1.png" alt="Scheda Photos" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/photose2.png" alt="Scheda Photos in modifica" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Scheda Photos — schermata di modifica</figcaption>
+</figure>
+
+    <ul>
+      <li><span class="ctrl">Icona lente d'ingrandimento</span> (in basso a sinistra della foto): toccala per vedere la foto a schermo intero, dove puoi ingrandire per controllare messa a fuoco e dettagli fini.</li>
+      <li><span class="ctrl">Icona ritaglio</span> (in basso a destra della foto): toccala per aprire la schermata di ritaglio, per ritagliare e raddrizzare. Puoi ripetere la regolazione tutte le volte che vuoi anche dopo aver confermato, e puoi anche ripristinare l'originale intatto.</li>
+      <li><span class="ctrl">Metadati</span>: mostrati sotto. Puoi applicare un modello diverso e modificarne il contenuto.</li>
+      <li><span class="ctrl">Pulsanti in basso</span>: invia questa singola foto / condividi (Share) invece di FTP / cancella i metadati / elimina questa foto, più <b>Copia e Incolla metadati.</b> Copia/Incolla è utile quando vuoi applicare a un'altra foto gli stessi metadati appena inseriti. Anche quando copi e incolli, <b>la data/ora di scatto e il numero progressivo (<code>{Seq}</code> / <code>{Jseq}</code>) mantengono i valori propri di ciascuna foto</b> (non vengono sovrascritti). I numeri progressivi sono assegnati per foto al momento dell'invio.</li>
+    </ul>
+
+    <!-- Sent -->
+    <h2 class="sec" id="it-sent">Scheda Sent</h2>
+    <hr class="sec-rule">
+    <p>Le foto che hanno terminato l'invio dalla scheda Photos si spostano qui. Puoi reinviarle e puoi modificare di nuovo la didascalia e gli altri metadati prima di reinviarle. In generale puoi fare le stesse cose della schermata di modifica di Photos.</p>
+    <p>Nota: poiché si tratta esclusivamente di un reinvio, il ritaglio è disattivato. Se il ritaglio fosse consentito, non sarebbe più un reinvio ma l'invio di una foto nuova e diversa.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/sent1.png" alt="Scheda Sent" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/sent2.png" alt="Scheda Sent in modifica" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Scheda Sent</figcaption>
+</figure>
+
+    <!-- Template -->
+    <h2 class="sec" id="it-template">Scheda Template</h2>
+    <hr class="sec-rule">
+
+    <h3>Campi del modello (Template Fields)</h3>
+    <p>Per prima cosa, scorri verso il basso e inserisci il contenuto nei Campi del modello (20 in totale) che ti servono.</p>
+    <p>A destra, il pulsante <span class="ctrl">Customize</span> apre l'editor dei campi. Con le caselle di spunta a sinistra scegli quali dei 20 campi sono normalmente visibili. Deselezionare i campi fissi che tocchi raramente dopo la configurazione li mantiene nascosti: così il modello resta più ordinato e si evitano modifiche accidentali. Qui puoi anche cambiare l'ordine dei campi.</p>
+    <p>Per salvare un modello modificato, scorri di nuovo verso l'alto e usa il pulsante <span class="ctrl">Save</span> nella sezione Template per salvarlo con un nome. Puoi memorizzare fino a <b>75 modelli.</b> Puoi anche esportare tutti i modelli salvati come un unico file per effettuarne il backup o condividerli.</p>
+
+    <figure>
+  <div style="display:flex; flex-wrap:wrap; gap:12px">
+    <img class="shot" src="images/template1.png" alt="Scheda Template 1" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template2.png" alt="Scheda Template 2" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template3.png" alt="Scheda Template 3" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template4.png" alt="Scheda Template 4" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template5.png" alt="Scheda Template 5" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template6.png" alt="Scheda Template 6" style="width:calc(50% - 6px); min-width:0">
+  </div>
+  <figcaption>Scheda Template</figcaption>
+</figure>
+
+    <h3>Variabile progressiva (Sequence)</h3>
+    <p>Permette di impostare un numero incrementale. Attivalo o disattivalo con l'interruttore; può essere usato all'interno di qualsiasi campo del modello.</p>
+    <ul>
+      <li>Usa <code>{Seq}</code> per cifre a mezza larghezza, o <code>{Jseq}</code> per cifre a piena larghezza.</li>
+      <li>Puoi impostare liberamente il numero iniziale. Il pulsante <span class="ctrl">Reset</span> qui sotto lo riporta al numero iniziale.</li>
+      <li>Questo numero viene assegnato <b>al momento in cui invii le foto,</b> quindi è applicato solo alle foto che invii effettivamente. Di conseguenza non ci sono salti o numeri mancanti, e la numerazione corrisponde esattamente al numero di foto inviate.</li>
+      <li>Se reinvii una foto dalla scheda Sent, solo questo numero non cambia: resta il numero esclusivo di quella foto.</li>
+    </ul>
+
+    <h3>Sostituzioni di codice (Code Replacements)</h3>
+    <p>Puoi usare lo stesso servizio di sostituzione di codice disponibile in strumenti come Photo Mechanic. Puoi ovviamente scaricare e usare file di codici, e puoi anche aggiungere i tuoi codici oltre a quelli, interamente nell'app. I tuoi codici possono essere condivisi, salvati e riordinati.</p>
+    <p>Quando è usato in un modello, un codice resta mostrato come codice finché non viene applicato a una foto reale, quindi può essere usato anche come una variabile: le possibilità dipendono dalle tue idee. Quando è usato su una singola foto nella scheda Photos o Sent, un codice viene convertito nel momento in cui lo digiti.</p>
+    <p>Il delimitatore che racchiude un codice è <code>=</code> per impostazione predefinita, ma puoi cambiarlo con il carattere che ti risulta più comodo.</p>
+
+    <!-- Receive -->
+    <h2 class="sec" id="it-receive">Scheda Receive</h2>
+    <hr class="sec-rule">
+    <p>La scheda per configurare le informazioni del server usate per ricevere le foto dalla fotocamera.</p>
+    <ul>
+      <li><span class="ctrl">Address</span>: è ciò che imposti sulla fotocamera. Per una connessione in tethering, l'iPhone lo assegna automaticamente.</li>
+      <li><span class="ctrl">Port</span>: 2121 è fisso come impostazione predefinita.</li>
+      <li><span class="ctrl">Username / Password</span>: impostali come preferisci (e falli corrispondere sulla fotocamera che si connette). Puoi usare l'app lasciandoli vuoti, ma consigliamo di impostarli per sicurezza.</li>
+      <li><span class="ctrl">Send RAW</span>: una modalità che invia la foto esattamente come ricevuta dalla fotocamera, il RAW intatto. Utile per i test e scopi simili.</li>
+    </ul>
+
+    <!-- More -->
+    <h2 class="sec" id="it-more">Scheda More</h2>
+    <hr class="sec-rule">
+    <p>Ci sono tre pagine:</p>
+    <ol>
+      <li><span class="ctrl">FTP</span>: configura le destinazioni di invio (FTP). Puoi creare più configurazioni e cambiare la destinazione a seconda della foto.</li>
+      <li><span class="ctrl">Log</span>: registra l'attività dell'app. Fornisce indizi per risalire alla causa se qualcosa va storto.</li>
+      <li><span class="ctrl">Account</span>: controlla il tuo stato, come lo stato attuale dell'abbonamento.</li>
+    </ol>
+
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- Español                                                        -->
+  <!-- ============================================================= -->
+  <section id="guide-es" hidden>
+
+    <nav class="toc">
+      <h2>Contenido</h2>
+      <ol>
+        <li><a href="#es-photos">Pestaña Photos</a></li>
+        <li><a href="#es-sent">Pestaña Sent</a></li>
+        <li><a href="#es-template">Pestaña Template</a></li>
+        <li><a href="#es-receive">Pestaña Receive</a></li>
+        <li><a href="#es-more">Pestaña More</a></li>
+      </ol>
+    </nav>
+
+    <p>Un flujo de trabajo inalámbrico todo en uno para fotógrafos de prensa y deportivos: recibe las fotos desde tu cámara, añade metadatos IPTC (pies de foto) y envíalas a la redacción por FTP, todo en un solo iPhone o iPad. Esta guía recorre cada pestaña una por una.</p>
+
+    <!-- Photos -->
+    <h2 class="sec" id="es-photos">Pestaña Photos</h2>
+    <hr class="sec-rule">
+    <p>La pestaña principal, donde registras las fotos que vas a enviar, añades sus metadatos y las envías.</p>
+
+    <figure>
+      <img class="shot" src="images/photos.png" alt="Pestaña Photos">
+      <figcaption>Pestaña Photos</figcaption>
+    </figure>
+
+    <p><span class="ctrl">Add Photos</span> / el botón «+»<br>
+    Botones para registrar las fotos que quieres enviar. Cuando no hay ninguna foto registrada, en el centro de la pantalla aparece «Add Photos». En cuanto se registra al menos una foto, «Add Photos» desaparece y para añadir más usas el botón «+» de la esquina superior derecha.</p>
+
+    <p><span class="ctrl">Edit</span> (arriba a la izquierda)<br>
+    Selecciona fotos en la pestaña para eliminarlas, aplicarles una plantilla o enviar solo las fotos seleccionadas (Send Selected). También puedes enviar una sola foto desde la pantalla de edición que se abre al tocar una foto.</p>
+
+    <p><span class="ctrl">…</span> (arriba a la derecha)<br>
+    Aplica una misma plantilla a todas las fotos que hay en la pestaña de una sola vez. Desde aquí también puedes eliminar todas las fotos.</p>
+
+    <p><span class="ctrl">Receive</span> (arriba en el centro)<br>
+    Recibe las fotos enviadas desde tu cámara (activa el servidor integrado).</p>
+    <ul>
+      <li>Puedes recibir mediante la función de compartir conexión (Hotspot personal) del iPhone.</li>
+      <li>Como alternativa, si creas un archivo de ajustes de conexión FTP en la cámara, puedes conectarte directamente a la cámara y recibir sin usar compartir conexión. Los ajustes de conexión para cámaras Canon (modelos compatibles) se pueden descargar gratis desde la página de Soporte.</li>
+      <li>Los ajustes para Nikon y Sony se añadirán más adelante.</li>
+    </ul>
+
+    <p><span class="ctrl">Selector de plantillas</span> (debajo de Receive, en el centro)<br>
+    Cuando recibes fotos con Receive, se importan con la plantilla seleccionada aquí ya aplicada. (Después de recibir, puedes volver a aplicar una plantilla distinta tantas veces como quieras desde Edit.)</p>
+
+    <p><span class="ctrl">Botón Embed IPTC &amp; Send via FTP</span> (encima de la barra de pestañas inferior)<br>
+    Finaliza la plantilla (metadatos del pie de foto) aplicada a tus fotos e inicia el envío por FTP. El destino FTP seleccionado actualmente se muestra justo encima de este botón.</p>
+
+    <div class="note">
+      <b>Acerca de las etiquetas de voz (notas de audio)</b><br>
+      Una anotación de voz grabada en la cámara (una etiqueta de voz) se recibe emparejada con su foto. Puedes reproducirla para revisarla en la pantalla de edición de la foto, tanto en la pestaña Photos como en la Sent. Las fotos que tienen una etiqueta de voz muestran un icono de micrófono morado junto al nombre del archivo en ambas pestañas, así reconoces de un vistazo las tomas con audio. Al enviar, se entrega a la redacción junto con la foto, todavía vinculada como pareja: así tus notas e indicaciones habladas viajan con la imagen.
+    </div>
+
+    <div class="note">
+      <b>Acerca de bloquear la pantalla durante el envío</b><br>
+      ・Si bloqueas (pones en reposo) el propio iPhone durante el envío, la transferencia se detiene. Por eso, el bloqueo automático (reposo automático) se desactiva durante el envío.<br>
+      ・Para evitar toques accidentales durante una transferencia, aparece un icono de candado en el centro superior. Tócalo para hacer un bloqueo suave de la pantalla. <b>Un bloqueo suave NO detiene la transferencia.</b> Puedes guardar el teléfono en el bolsillo sin activar nada por error.<br>
+      ・Para liberar el bloqueo suave, usa la barra deslizante que aparece en la parte inferior de la pantalla.<br>
+      ・Durante el bloqueo suave, el estado actual de la transferencia (fotos enviadas, fotos restantes, etc.) se muestra en el centro de la pantalla.
+    </div>
+
+    <h3>Pantalla de edición de la foto</h3>
+    <p>Toca la miniatura de una foto registrada para abrir su pantalla de edición.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/photose1.png" alt="Pestaña Photos" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/photose2.png" alt="Pestaña Photos en edición" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Pestaña Photos — pantalla de edición</figcaption>
+</figure>
+
+    <ul>
+      <li><span class="ctrl">Icono de lupa</span> (abajo a la izquierda de la foto): tócalo para ver la foto a pantalla completa, donde puedes ampliar para comprobar el enfoque y los detalles finos.</li>
+      <li><span class="ctrl">Icono de recorte</span> (abajo a la derecha de la foto): tócalo para abrir la pantalla de recorte, para recortar y enderezar. Puedes reajustar tantas veces como quieras incluso después de confirmar, y también puedes volver al original intacto.</li>
+      <li><span class="ctrl">Metadatos</span>: se muestran debajo. Puedes aplicar una plantilla distinta y editar el contenido.</li>
+      <li><span class="ctrl">Botones de abajo</span>: enviar esta única foto / compartir (Share) en lugar de FTP / borrar los metadatos / eliminar esta foto, además de <b>Copiar y Pegar metadatos.</b> Copiar/Pegar es útil cuando quieres aplicar a otra foto los mismos metadatos que acabas de introducir. Incluso al copiar y pegar, <b>la fecha/hora de captura y el número de secuencia (<code>{Seq}</code> / <code>{Jseq}</code>) conservan los valores propios de cada foto</b> (no se sobrescriben). Los números de secuencia se asignan por foto en el momento del envío.</li>
+    </ul>
+
+    <!-- Sent -->
+    <h2 class="sec" id="es-sent">Pestaña Sent</h2>
+    <hr class="sec-rule">
+    <p>Las fotos que terminaron de enviarse desde la pestaña Photos se mueven aquí. Puedes reenviarlas, y puedes volver a editar el pie de foto y otros metadatos antes de reenviarlas. En general puedes hacer lo mismo que en la pantalla de edición de Photos.</p>
+    <p>Nota: como esto es estrictamente un reenvío, el recorte está desactivado. Si se permitiera recortar, ya no sería un reenvío, sino el envío de una foto nueva y distinta.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/sent1.png" alt="Pestaña Sent" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/sent2.png" alt="Pestaña Sent en edición" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Pestaña Sent</figcaption>
+</figure>
+
+    <!-- Template -->
+    <h2 class="sec" id="es-template">Pestaña Template</h2>
+    <hr class="sec-rule">
+
+    <h3>Campos de la plantilla (Template Fields)</h3>
+    <p>Primero, desplázate hacia abajo e introduce el contenido en los Campos de la plantilla (20 en total) que necesites.</p>
+    <p>A la derecha, el botón <span class="ctrl">Customize</span> abre el editor de campos. Con las casillas de la izquierda eliges cuáles de los 20 campos son normalmente visibles. Desmarcar los campos fijos que apenas tocas tras la configuración los mantiene ocultos: así la plantilla queda más ordenada y se evitan ediciones accidentales. Aquí también puedes cambiar el orden de los campos.</p>
+    <p>Para guardar una plantilla editada, vuelve a desplazarte hacia arriba y usa el botón <span class="ctrl">Save</span> de la sección Template para guardarla con un nombre. Puedes almacenar hasta <b>75 plantillas.</b> También puedes exportar todas tus plantillas guardadas como un solo archivo para hacer una copia de seguridad o compartirlas.</p>
+
+    <figure>
+  <div style="display:flex; flex-wrap:wrap; gap:12px">
+    <img class="shot" src="images/template1.png" alt="Pestaña Template 1" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template2.png" alt="Pestaña Template 2" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template3.png" alt="Pestaña Template 3" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template4.png" alt="Pestaña Template 4" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template5.png" alt="Pestaña Template 5" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template6.png" alt="Pestaña Template 6" style="width:calc(50% - 6px); min-width:0">
+  </div>
+  <figcaption>Pestaña Template</figcaption>
+</figure>
+
+    <h3>Variable de secuencia (Sequence)</h3>
+    <p>Permite configurar un número que se incrementa. Actívalo o desactívalo con el interruptor; se puede usar dentro de cualquier campo de la plantilla.</p>
+    <ul>
+      <li>Usa <code>{Seq}</code> para dígitos de ancho medio, o <code>{Jseq}</code> para dígitos de ancho completo.</li>
+      <li>Puedes establecer libremente el número inicial. El botón <span class="ctrl">Reset</span> de abajo lo devuelve al número inicial.</li>
+      <li>Este número se asigna <b>en el momento en que envías las fotos,</b> así que solo se aplica a las fotos que envías realmente. Como resultado no hay saltos ni números omitidos, y la numeración corresponde exactamente al número de fotos enviadas.</li>
+      <li>Si reenvías una foto desde la pestaña Sent, solo este número no cambia: sigue siendo el número exclusivo de esa foto.</li>
+    </ul>
+
+    <h3>Sustituciones de código (Code Replacements)</h3>
+    <p>Puedes usar el mismo servicio de sustitución de código disponible en herramientas como Photo Mechanic. Por supuesto puedes descargar y usar archivos de códigos, y también puedes añadir tus propios códigos además de esos, todo dentro de la app. Tus propios códigos se pueden compartir, guardar y reordenar.</p>
+    <p>Cuando se usa en una plantilla, un código se sigue mostrando como código hasta que se aplica a una foto real, por lo que también puede usarse como una variable: las posibilidades dependen de tus ideas. Cuando se usa en una foto individual en la pestaña Photos o Sent, un código se convierte en el momento en que lo escribes.</p>
+    <p>El delimitador que envuelve un código es <code>=</code> de forma predeterminada, pero puedes cambiarlo por el carácter que te resulte más cómodo.</p>
+
+    <!-- Receive -->
+    <h2 class="sec" id="es-receive">Pestaña Receive</h2>
+    <hr class="sec-rule">
+    <p>La pestaña para configurar la información del servidor que se usa para recibir fotos desde tu cámara.</p>
+    <ul>
+      <li><span class="ctrl">Address</span>: es lo que configuras en la cámara. Para una conexión por compartir conexión, el iPhone lo asigna automáticamente.</li>
+      <li><span class="ctrl">Port</span>: 2121 está fijado como valor predeterminado.</li>
+      <li><span class="ctrl">Username / Password</span>: configúralos como quieras (y haz que coincidan en la cámara que se conecta). Puedes usar la app dejándolos en blanco, pero recomendamos configurarlos por seguridad.</li>
+      <li><span class="ctrl">Send RAW</span>: un modo que envía la foto exactamente como se recibió de la cámara, el RAW intacto. Útil para pruebas y fines similares.</li>
+    </ul>
+
+    <!-- More -->
+    <h2 class="sec" id="es-more">Pestaña More</h2>
+    <hr class="sec-rule">
+    <p>Hay tres páginas:</p>
+    <ol>
+      <li><span class="ctrl">FTP</span>: configura tus destinos de envío (FTP). Puedes crear varias configuraciones y cambiar el destino según la foto.</li>
+      <li><span class="ctrl">Log</span>: registra la actividad de la app. Te da pistas para rastrear la causa si algo va mal.</li>
+      <li><span class="ctrl">Account</span>: consulta tu estado, como el estado actual de la suscripción.</li>
+    </ol>
+
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- 한국어                                                          -->
+  <!-- ============================================================= -->
+  <section id="guide-ko" hidden>
+
+    <nav class="toc">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#ko-photos">Photos 탭</a></li>
+        <li><a href="#ko-sent">Sent 탭</a></li>
+        <li><a href="#ko-template">Template 탭</a></li>
+        <li><a href="#ko-receive">Receive 탭</a></li>
+        <li><a href="#ko-more">More 탭</a></li>
+      </ol>
+    </nav>
+
+    <p>보도·스포츠 포토그래퍼를 위한 올인원 무선 워크플로우입니다. 카메라에서 사진을 받아 IPTC 메타데이터(사진 설명)를 넣고 FTP로 데스크에 전송하는 과정을 iPhone 또는 iPad 한 대로 완결할 수 있습니다. 이 가이드는 각 탭의 조작을 순서대로 설명합니다.</p>
+
+    <!-- Photos -->
+    <h2 class="sec" id="ko-photos">Photos 탭</h2>
+    <hr class="sec-rule">
+    <p>전송할 사진을 등록하고 메타데이터를 넣어 전송하는 중심 탭입니다.</p>
+
+    <figure>
+      <img class="shot" src="images/photos.png" alt="Photos 탭">
+      <figcaption>Photos 탭</figcaption>
+    </figure>
+
+    <p><span class="ctrl">Add Photos</span> / 「+」 버튼<br>
+    전송할 사진을 탭에 등록하는 버튼입니다. 등록된 사진이 0장일 때는 화면 중앙에 「Add Photos」가 표시됩니다. 한 장이라도 등록되면 「Add Photos」는 사라지고, 이후에는 오른쪽 위 모서리의 「+」 버튼으로 추가합니다.</p>
+
+    <p><span class="ctrl">Edit</span> (왼쪽 위 모서리)<br>
+    탭의 사진을 선택하여 선택한 사진 삭제, 템플릿 적용, 선택한 사진만 전송(Send Selected)을 할 수 있습니다. 한 장씩 전송은 사진을 탭하여 여는 편집 화면에서도 할 수 있습니다.</p>
+
+    <p><span class="ctrl">…</span> (오른쪽 위 모서리)<br>
+    탭에 있는 모든 사진에 같은 템플릿을 한 번에 일괄 적용합니다. 또한 모든 사진을 삭제할 수도 있습니다.</p>
+
+    <p><span class="ctrl">Receive</span> (중앙 위)<br>
+    카메라에서 전송되는 사진을 받습니다(내장 서버를 켭니다).</p>
+    <ul>
+      <li>iPhone의 테더링(개인용 핫스팟) 기능으로 받을 수 있습니다.</li>
+      <li>또는 카메라에서 FTP 연결 설정 파일을 만들어 두면, 테더링을 사용하지 않고 카메라와 직접 연결하여 받을 수 있습니다. Canon 카메라(지원 기종)용 연결 설정은 지원 페이지에서 무료로 다운로드할 수 있습니다.</li>
+      <li>Nikon·Sony용도 추후 제공 예정입니다.</li>
+    </ul>
+
+    <p><span class="ctrl">템플릿 선택 버튼</span> (중앙 Receive 아래)<br>
+    Receive로 사진을 받을 때, 여기서 선택한 템플릿이 적용된 상태로 가져옵니다. (받은 후에도 Edit에서 다른 템플릿을 몇 번이든 다시 적용할 수 있습니다.)</p>
+
+    <p><span class="ctrl">Embed IPTC &amp; Send via FTP 버튼</span> (하단 탭 바 위)<br>
+    사진에 적용된 템플릿(사진 설명 메타데이터)을 최종 확정하고 FTP로 전송을 시작합니다. 이 버튼 바로 위에는 현재 선택된 FTP 전송 대상이 표시됩니다.</p>
+
+    <div class="note">
+      <b>보이스 태그(음성 메모)에 대하여</b><br>
+      카메라에서 사진에 녹음한 음성 설명(보이스 태그)은 사진과 쌍으로 받습니다. Photos·Sent 두 탭 모두에서 사진 편집 화면에서 재생하여 내용을 확인할 수 있습니다. 보이스 태그가 있는 사진은 두 탭의 목록에서 파일명 옆에 보라색 마이크 아이콘이 표시되어 한눈에 음성이 있는지 알 수 있습니다. 전송 시에는 사진에 연결된 채 쌍으로 전송 대상에 보내지므로, 음성 지시나 메모를 사진과 함께 그대로 전달할 수 있습니다.
+    </div>
+
+    <div class="note">
+      <b>전송 중 화면 잠금에 대하여</b><br>
+      ・전송 중에 iPhone 본체를 잠그면(절전) 전송이 멈춥니다. 그래서 전송 중에는 자동 잠금(자동 절전)이 작동하지 않도록 합니다.<br>
+      ・전송 중 오터치를 방지하기 위해 중앙 상단에 「자물쇠 아이콘」이 표시됩니다. 이것을 탭하면 화면을 소프트 잠금할 수 있습니다. <b>소프트 잠금에서는 전송이 멈추지 않습니다.</b> 주머니에 넣어도 잘못 조작되지 않습니다.<br>
+      ・소프트 잠금 해제는 화면 하단에 나타나는 스와이프 바로 합니다.<br>
+      ・소프트 잠금 중에는 화면 중앙에서 현재 전송 상황(전송 완료 장수·남은 장수 등)을 확인할 수 있습니다.
+    </div>
+
+    <h3>사진 편집 화면</h3>
+    <p>등록된 사진의 아이콘을 탭하면 그 사진의 편집 화면이 열립니다.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/photose1.png" alt="Photos 탭" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/photose2.png" alt="Photos 탭 편집 중" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Photos 탭 · 편집 화면</figcaption>
+</figure>
+
+    <ul>
+      <li><span class="ctrl">돋보기 아이콘</span> (사진 왼쪽 아래 모서리): 탭하면 전체 화면으로 표시되어, 확대하여 사진의 초점·세부를 확인할 수 있습니다.</li>
+      <li><span class="ctrl">자르기 아이콘</span> (사진 오른쪽 아래 모서리): 탭하면 자르기 화면이 열려 자르기·기울기 조정을 할 수 있습니다. 확정 후에도 몇 번이든 다시 조정할 수 있고, 한 번도 손대지 않은 처음 상태로 되돌릴 수도 있습니다.</li>
+      <li><span class="ctrl">메타데이터</span>: 그 아래에 표시됩니다. 다른 템플릿 적용이나 내용 편집을 할 수 있습니다.</li>
+      <li><span class="ctrl">맨 아래 버튼</span>: 이 사진 한 장만 전송 / FTP가 아닌 공유(Share) / 메타데이터 지우기 / 이 사진 삭제, 그리고 <b>메타데이터 복사·붙여넣기</b>를 할 수 있습니다. 직전에 편집한 사진과 같은 메타데이터를 다른 사진에도 적용하고 싶을 때 편리합니다. 복사·붙여넣기를 해도 <b>촬영 일시와 연번(<code>{Seq}</code> / <code>{Jseq}</code>)은 각 사진 고유의 값이 유지됩니다</b>(덮어쓰이지 않습니다). 연번은 전송 시 사진마다 매겨집니다.</li>
+    </ul>
+
+    <!-- Sent -->
+    <h2 class="sec" id="ko-sent">Sent 탭</h2>
+    <hr class="sec-rule">
+    <p>Photos 탭에서 전송이 완료된 사진이 이곳으로 이동합니다. 다시 전송할 수 있을 뿐 아니라, 재전송 시 사진 설명을 비롯한 메타데이터를 다시 편집할 수도 있습니다. 기본적으로 Photos 탭의 편집 화면과 같은 작업을 할 수 있습니다.</p>
+    <p>※ 어디까지나 「재전송」이므로 자르기는 할 수 없도록 되어 있습니다. 자르기가 가능하면 재전송이 아니라 새로운 사진의 전송이 되어 버리기 때문입니다.</p>
+
+    <figure>
+  <div style="display:flex; gap:12px; flex-wrap:wrap">
+    <img class="shot" src="images/sent1.png" alt="Sent 탭" style="flex:1; min-width:0; width:auto">
+    <img class="shot" src="images/sent2.png" alt="Sent 탭 편집 중" style="flex:1; min-width:0; width:auto">
+  </div>
+  <figcaption>Sent 탭</figcaption>
+</figure>
+
+    <!-- Template -->
+    <h2 class="sec" id="ko-template">Template 탭</h2>
+    <hr class="sec-rule">
+
+    <h3>템플릿 필드 (Template Fields)</h3>
+    <p>먼저 아래로 스크롤하여 Template Field(전 20개 항목) 중 자신에게 필요한 항목에 내용을 입력합니다.</p>
+    <p>오른쪽의 <span class="ctrl">Customize</span> 버튼에서 항목 편집 화면을 열 수 있습니다. 왼쪽 체크로 20개 항목 중 「평소 표시할 항목」을 선택할 수 있습니다. 설정 후 거의 손대지 않는 고정 항목은 체크를 해제해 두면 평소에는 보이지 않아 템플릿이 깔끔해지고 오편집도 방지됩니다. 항목의 순서도 여기서 변경할 수 있습니다.</p>
+    <p>편집한 템플릿은 위로 스크롤하여 Template 영역의 <span class="ctrl">Save</span> 버튼에서 이름을 붙여 저장할 수 있습니다. 템플릿은 <b>75개</b>까지 등록할 수 있습니다. 또한 저장한 모든 템플릿을 하나의 파일로 내보내 백업하거나 공유할 수 있습니다.</p>
+
+    <figure>
+  <div style="display:flex; flex-wrap:wrap; gap:12px">
+    <img class="shot" src="images/template1.png" alt="Template 탭 1" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template2.png" alt="Template 탭 2" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template3.png" alt="Template 탭 3" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template4.png" alt="Template 탭 4" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template5.png" alt="Template 탭 5" style="width:calc(50% - 6px); min-width:0">
+    <img class="shot" src="images/template6.png" alt="Template 탭 6" style="width:calc(50% - 6px); min-width:0">
+  </div>
+  <figcaption>Template 탭</figcaption>
+</figure>
+
+    <h3>연번 변수 (Sequence)</h3>
+    <p>연속 번호를 매기는 변수를 설정할 수 있습니다. 사용·미사용은 스위치로 전환하며, 템플릿의 어느 항목 안에서도 사용할 수 있습니다.</p>
+    <ul>
+      <li><b>반각 숫자</b>로 넣으려면 <code>{Seq}</code>, <b>전각 숫자</b>로 넣으려면 <code>{Jseq}</code>를 사용합니다.</li>
+      <li>연속 번호의 시작 번호는 자유롭게 설정할 수 있습니다. 아래의 <span class="ctrl">Reset</span> 버튼을 누르면 시작 번호로 초기화됩니다.</li>
+      <li>이 번호는 <b>사진 전송을 실행한 때에 매겨지므로</b>, 실제로 전송한 사진에만 적용됩니다. 따라서 건너뛰거나 빠진 번호가 생기지 않고, 전송 장수와 정확히 대응하는 번호가 됩니다.</li>
+      <li>Sent 탭의 전송 완료 사진을 재전송해도 이 번호만은 바뀌지 않습니다. 그 사진 고유의 번호가 됩니다.</li>
+    </ul>
+
+    <h3>코드 치환 (Code Replacements)</h3>
+    <p>Photo Mechanic 등에서 사용할 수 있는 코드 치환 서비스를 이용할 수 있습니다. 코드를 다운로드하여 사용하는 것은 물론, 그 코드에 직접 만든 코드를 더해 사용하는 것을 앱만으로 완결할 수 있습니다. 직접 만든 코드는 공유·저장·정렬할 수 있습니다.</p>
+    <p>템플릿에 사용하면 실제 사진에 적용하기 전까지는 코드 표시 그대로이므로 변수처럼 사용할 수도 있어, 활용법은 사용자의 아이디어에 따라 넓어집니다. Photos 탭이나 Sent 탭에서 개별 사진에 사용할 경우에는 코드를 넣는 순간 변환됩니다.</p>
+    <p>코드 변환의 「감싸는 문자」는 기본 설정에서는 <code>=</code>이지만, 자신이 쓰기 편한 문자로 변경할 수 있습니다.</p>
+
+    <!-- Receive -->
+    <h2 class="sec" id="ko-receive">Receive 탭</h2>
+    <hr class="sec-rule">
+    <p>카메라에서 사진을 받기 위한 서버 정보를 설정하는 탭입니다.</p>
+    <ul>
+      <li><span class="ctrl">Address</span>: 카메라에서 설정한 것이 됩니다. 테더링 연결에서는 iPhone이 자동으로 할당합니다.</li>
+      <li><span class="ctrl">Port</span>: 2121이 기본값으로 고정되어 있습니다.</li>
+      <li><span class="ctrl">Username·Password</span>: 원하는 것으로 설정하세요(연결하는 카메라 쪽도 이에 맞춥니다). 설정하지 않고 비워 두어도 사용할 수 있지만, 보안을 위해 설정하는 것을 권장합니다.</li>
+      <li><span class="ctrl">Send RAW</span>: 카메라에서 받은 그대로 전혀 가공하지 않은 RAW 상태로 전송하는 모드입니다. 테스트 등에 편리하게 사용할 수 있습니다.</li>
+    </ul>
+
+    <!-- More -->
+    <h2 class="sec" id="ko-more">More 탭</h2>
+    <hr class="sec-rule">
+    <p>3개의 페이지가 있습니다.</p>
+    <ol>
+      <li><span class="ctrl">FTP</span>: 사진의 전송 대상(FTP)을 설정합니다. 설정은 여러 개 만들 수 있으며, 사진에 따라 전송 대상을 전환할 수 있습니다.</li>
+      <li><span class="ctrl">Log</span>: 앱의 동작을 기록합니다. 문제가 발생했을 때 원인 규명의 단서가 됩니다.</li>
+      <li><span class="ctrl">Account</span>: 현재 구독 상태 등 자신의 이용 상황을 확인할 수 있습니다.</li>
+    </ol>
+
+  </section>
+
   <footer>
     © 2026 Yoshiharu Aoki ·
     <a href="./">Support / サポート</a>
@@ -422,21 +887,28 @@
 </div>
 
 <script>
-  // 言語切り替え（ストレージは使わず、表示の出し分けのみ）
-  function setLang(lang){
-    var ja = document.getElementById('guide-ja');
-    var en = document.getElementById('guide-en');
-    var bja = document.getElementById('btn-ja');
-    var ben = document.getElementById('btn-en');
-    var isJa = (lang === 'ja');
-    ja.hidden = !isJa;
-    en.hidden = isJa;
-    bja.classList.toggle('active', isJa);
-    ben.classList.toggle('active', !isJa);
-    document.documentElement.lang = lang;
-    // 言語を切り替えたらページ先頭へ
-    window.scrollTo({ top: 0 });
+(function(){
+  var SUP = ['ja','en','it','es','ko'];
+  var sel = document.getElementById('langSelect');
+  function apply(l){
+    if(SUP.indexOf(l) < 0) l = 'en';
+    for(var i=0;i<SUP.length;i++){
+      var s = document.getElementById('guide-' + SUP[i]);
+      if(s) s.hidden = (SUP[i] !== l);
+    }
+    document.documentElement.lang = l;
+    if(sel) sel.value = l;
+    try{ localStorage.setItem('guideLang', l); }catch(e){}
   }
+  var saved = null;
+  try{ saved = localStorage.getItem('guideLang'); }catch(e){}
+  if(!saved){
+    var nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+    saved = SUP.indexOf(nav) >= 0 ? nav : 'en';
+  }
+  if(sel){ sel.addEventListener('change', function(){ apply(sel.value); window.scrollTo({ top: 0 }); }); }
+  apply(saved);
+})();
 </script>
 
 </body>
