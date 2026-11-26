@@ -177,7 +177,11 @@
     <p class="lang-label">How to connect (English)</p>
     <ol class="steps">
       <li>Load the downloaded setting file (File name: canon01.NIF) into your camera — via EOS&nbsp;Utility, or copy the file to the top (root) level of the memory card and import it from the camera menu.</li>
-      <li>On iPhone, turn <strong>OFF</strong> “Auto-Join” for your current Wi-Fi network. Otherwise the iPhone quickly drops the camera connection and switches back to that network. (This gives the camera connection priority.)</li>
+      <li>On iPhone, turn <strong>OFF</strong> “Auto-Join” for your current Wi-Fi network. Otherwise the iPhone quickly drops the camera connection and switches back to that network. (This gives the camera connection priority.)<!-- ▼ English step 2 の末尾に追加（Quick Connect note） -->
+<div style="margin:0.6em 0 0; padding:0.7em 0.9em; border-left:3px solid #0a84ff; background:rgba(10,132,255,0.06); border-radius:5px; font-size:0.95em; line-height:1.7;">
+  <strong>Note: When using Quick Connect (on) in IPTCPhotoSender ver3.3 / FTPReceiver v1.8</strong>, you do not need to turn off Auto-Join for your current Wi-Fi. After you finish receiving, turn the app&rsquo;s &ldquo;Receive&rdquo; off (in FTPReceiver, &ldquo;Stop&rdquo; the server) and also turn off the camera&rsquo;s FTP connection; the connection is then dropped and your device reconnects to the Wi-Fi it was on before connecting to the camera.
+</div>
+<!-- ▲ end (English) --></li>
       <li>Select the imported connection setting on the camera and start the connection from the camera.</li>
       <li>On iPhone, open Settings → Wi-Fi. When <span class="kbd">IPTCPS</span> appears, tap to connect.</li>
       <li>When the spinner appears next to <span class="kbd">IPTCPS</span> (it moves to the top of the Wi-Fi list), tap the “ⓘ” on the right → set “Configure IP” to <strong>Manual</strong>, then enter IP Address <span class="kbd">192.168.1.20</span> and Subnet Mask <span class="kbd">255.255.255.0</span>. While here, turn <strong>ON</strong> “Auto-Join” for <span class="kbd">IPTCPS</span>.</li>
